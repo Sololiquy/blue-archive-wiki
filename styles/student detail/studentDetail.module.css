@@ -1,0 +1,27 @@
+.background {
+    @apply fixed inset-0 w-full h-full z-[-1];
+
+    .backgroundImg {
+        @apply w-full h-full object-cover blur-md brightness-[0.75] scale-[1.1];
+    }
+}
+
+.container {
+    @apply flex h-[calc(100vh-2.5rem)] relative;
+}
+
+.characterSpriteContainer {
+    @apply h-full min-w-[500px] flex grow justify-center items-center;
+
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.characterSpriteContainer img {
+    @apply h-full object-cover;
+}
+
+.descriptionContainer {
+    @apply w-[452px] h-full mr-[4vw];
+
+    background-color: hsla(0, 0%, 0%, 0.3);
+}

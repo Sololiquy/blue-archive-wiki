@@ -1,0 +1,27 @@
+.statContainer {
+    @apply flex items-center w-48;
+
+    background-color: rgba(0, 0, 0, 0.5);
+
+    .name {
+        @apply flex-grow overflow-hidden whitespace-nowrap text-ellipsis;
+    }
+
+    .value {
+        @apply ml-5 mr-2 flex-shrink-0;
+    }
+}
+
+.terrainContainer {
+    @apply shrink-0 flex w-24 min-w-12 h-12 mr-1 items-center;
+
+    background-color: rgba(0, 0, 0, 0.5);
+
+    .terrainImg {
+        @apply w-full h-full object-contain;
+    }
+
+    .terrainValue {
+        @apply w-4/5 h-4/5 mr-1 object-contain;
+    }
+}
