@@ -18,26 +18,29 @@
 }
 
 .container2 {
-    @apply mt-1;
+    @apply mt-1 w-full;
     background-color: rgba(0, 0, 0, 0.3);
 }
 
 .container3 {
-    @apply mt-1 flex flex-row;
+    @apply mt-1 w-full flex flex-row;
     background-color: rgba(0, 0, 0, 0.3);
 }
 
 .container4 {
-    @apply mt-1 flex flex-row;
+    @apply mt-1 w-full h-[324px] flex flex-row;
     background-color: rgba(0, 0, 0, 0.3);
-
-    .studentStat {
-        @apply w-48 mr-1;
-    }
-    .studentSkill {
-        @apply w-48;
-        background-color: rgba(0, 0, 0, 0.5);
-    }
+}
+.studentStat {
+    @apply w-48 mr-1;
+}
+.studentEquipment {
+    @apply w-full h-full overflow-hidden flex flex-col;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.separator {
+    @apply px-2 flex flex-grow justify-center items-center;
+    color: white;
 }
 
 .roundedContainer {

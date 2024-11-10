@@ -25,3 +25,19 @@
         @apply w-4/5 h-4/5 mr-1 object-contain;
     }
 }
+
+/* equipment.tsx */
+
+.equipmentContainer {
+    @apply m-1.5 h-16 grow-0 flex flex-row;
+}
+.containerImg {
+    @apply flex size-16 rounded-full justify-center items-center;
+    background-color: rgb(140, 147, 158);
+}
+.equipmentImg {
+    @apply object-contain;
+}
+.equipmentLevel {
+    @apply w-10 h-10 self-center;
+}
