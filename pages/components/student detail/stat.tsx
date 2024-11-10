@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 
-import { context } from "../../studentDetail";
+import { contextDetailStudent } from "../../studentDetail";
 
 import styles from "@/styles/student detail/component.module.css";
 
@@ -11,18 +11,18 @@ interface VariableType {
 }
 
 const Stat = ({ typeStat, nameStat, Level }: VariableType) => {
-    const { data } = useContext(context);
+    const { studentData } = useContext(contextDetailStudent);
     const statIconURL = `https://raw.githubusercontent.com/SchaleDB/SchaleDB/main/images/staticon/Stat_${typeStat}.png`;
 
     const trueValue = () => {
-        if (data && typeStat === "MaxHP") {
-            return Math.round(data.MaxHP1 + ((data.MaxHP100 - data.MaxHP1) / 99) * (Level - 1));
-        } else if (data && typeStat === "AttackPower") {
-            return Math.round(data.AttackPower1 + ((data.AttackPower100 - data?.AttackPower1) / 99) * (Level - 1));
-        } else if (data && typeStat === "DefensePower") {
-            return Math.round(data.DefensePower1 + ((data.DefensePower100 - data?.DefensePower1) / 99) * (Level - 1));
+        if (studentData && typeStat === "MaxHP") {
+            return Math.round(studentData.MaxHP1 + ((studentData.MaxHP100 - studentData.MaxHP1) / 99) * (Level - 1));
+        } else if (studentData && typeStat === "AttackPower") {
+            return Math.round(studentData.AttackPower1 + ((studentData.AttackPower100 - studentData?.AttackPower1) / 99) * (Level - 1));
+        } else if (studentData && typeStat === "DefensePower") {
+            return Math.round(studentData.DefensePower1 + ((studentData.DefensePower100 - studentData?.DefensePower1) / 99) * (Level - 1));
         } else {
-            return data?.[typeStat as keyof typeof data];
+            return studentData?.[typeStat as keyof typeof studentData];
         }
     };
 

@@ -1,19 +1,18 @@
 import React, { useContext } from "react";
-import { context } from "../../studentList";
-
+import { contextAPI } from "../../_app";
 import styles from "@/styles/student list/component.module.css";
 
 const ButtonSearch = () => {
-    const { setData, defaultData } = useContext(context);
+    const { studentDefaultDataAPI, setStudentDataAPI } = useContext(contextAPI);
 
     const search = () => {
         const searchValue = (document.getElementById("value") as HTMLInputElement)?.value.toLowerCase();
 
-        if (searchValue === "") {
-            setData(defaultData);
-        } else {
-            const filteredData = defaultData.filter((data) => data.Name.toLowerCase().includes(searchValue));
-            setData(filteredData);
+        if (!searchValue) {
+            setStudentDataAPI(studentDefaultDataAPI);
+        } else if (studentDefaultDataAPI) {
+            const filteredData = studentDefaultDataAPI.filter((student) => student.Name.toLowerCase().includes(searchValue));
+            setStudentDataAPI(filteredData);
         }
     };
 
