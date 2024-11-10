@@ -4,7 +4,35 @@ import StatDescription from "./components/student detail/statDescription";
 import styles from "@/styles/student detail/studentDetail.module.css";
 import { contextAPI } from "./_app";
 
-export const contextDetailStudent = createContext({});
+interface ContextType {
+    studentData: VariableType | null;
+}
+
+interface VariableType {
+    BulletType: string;
+    ArmorType: string;
+    SquadType: string;
+    Equipment: string;
+    Id: number;
+    CollectionBG: string;
+    WeaponImg: string;
+    TacticRole: string;
+    Name: string;
+    StarGrade: number;
+    StreetBattleAdaptation: string;
+    OutdoorBattleAdaptation: string;
+    IndoorBattleAdaptation: string;
+    MaxHP1: number;
+    MaxHP100: number;
+    AttackPower1: number;
+    AttackPower100: number;
+    DefensePower1: number;
+    DefensePower100: number;
+}
+
+export const contextDetailStudent = createContext<ContextType>({
+    studentData: null,
+});
 
 const StudentDetail = () => {
     const { query } = useRouter();
@@ -22,14 +50,14 @@ const StudentDetail = () => {
     return (
         <>
             <div className={styles.background}>
-                <img className={styles.backgroundImg} src={backgroundURL} alt="" />
+                <img className={styles.backgroundImg} src={backgroundURL} alt="Background" />
             </div>
             <div className={styles.container}>
                 <div className={styles.characterSpriteContainer}>
-                    <img src={studentSpriteURL} alt="" />
+                    <img src={studentSpriteURL} alt="Student" />
                 </div>
                 <div className={styles.descriptionContainer}>
-                    <contextDetailStudent.Provider value={{ studentData }}>
+                    <contextDetailStudent.Provider value={{ studentData: studentData as unknown as VariableType }}>
                         <StatDescription />
                     </contextDetailStudent.Provider>
                 </div>
