@@ -11,7 +11,8 @@ const SkillDescription = () => {
     const squadType = {
         Main: ["strikerRoleColor", "STRIKER"],
         Support: ["specialRoleColor", "SUPPORT"],
-    }[studentData?.SquadType as "Main" | "Support"];
+    }[studentData?.SquadType as "Main" | "Support"] || ["defaultRoleColor", "DEFAULT"]; // Default fallback
+
     return (
         <>
             <div className={styles.studentName}>{studentData?.Name}</div>
