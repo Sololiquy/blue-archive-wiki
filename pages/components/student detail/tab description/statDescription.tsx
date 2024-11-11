@@ -1,10 +1,10 @@
-import styles from "@/styles/student detail/statDescription.module.css";
+import styles from "@/styles/student detail/tabDescription.module.css";
 import Stat from "./stat";
 import Terrain from "./terrain";
 import Equipment from "./equipment";
 import EquipmentGear from "./equipmentGear";
 
-import { contextDetailStudent } from "../../studentDetail";
+import { contextDetailStudent } from "../../../studentDetail";
 
 import React, { useContext, useState } from "react";
 
@@ -58,8 +58,8 @@ const StatDescription = ({}) => {
                 </div>
                 <div className={`${styles.typeSquad} ${squadType[0]}`}>{squadType[1]}</div>
             </div>
-            <div className={styles.container2}>
-                <img src={studentWeaponURL} alt="" />
+            <div className={styles.weaponContainer}>
+                <img className={styles.weaponIMG} src={studentWeaponURL} alt="" />
             </div>
             <div className={styles.container3}>
                 <div className={styles.roundedContainer}>

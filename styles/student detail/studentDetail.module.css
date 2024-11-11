@@ -21,7 +21,13 @@
 }
 
 .descriptionContainer {
-    @apply w-[452px] h-full mr-[4vw];
+    @apply flex flex-row w-[550px] h-full mr-[4vw];
+}
+.tabDescriptionContainer {
+    @apply relative w-[94px] h-full mr-1 flex flex-col justify-center items-end;
+}
+.contentDescriptionContainer {
+    @apply w-[452px] h-full;
 
     background-color: hsla(0, 0%, 0%, 0.3);
 }

@@ -1,8 +1,8 @@
 import React, { Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
 
-import styles from "@/styles/student detail/component.module.css";
+import styles from "@/styles/student detail/tabDescription.module.css";
 
-import { contextDetailStudent } from "../../studentDetail";
+import { contextDetailStudent } from "../../../studentDetail";
 
 interface VariableType {
     levelEquipmentGear: number;

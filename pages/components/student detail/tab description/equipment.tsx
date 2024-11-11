@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useContext } from "react";
-import styles from "@/styles/student detail/component.module.css";
-import { contextDetailStudent } from "../../studentDetail";
+import styles from "@/styles/student detail/tabDescription.module.css";
+import { contextDetailStudent } from "../../../studentDetail";
 
 interface EquipmentProps {
     typeEquipment: number;

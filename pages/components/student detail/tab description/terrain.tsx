@@ -1,4 +1,4 @@
-import styles from "@/styles/student detail/component.module.css";
+import styles from "@/styles/student detail/tabDescription.module.css";
 
 interface VariableType {
     terrainType: string;

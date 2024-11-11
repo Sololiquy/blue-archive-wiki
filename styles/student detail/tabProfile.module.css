@@ -1,0 +1,62 @@
+.studentName {
+    @apply ml-1 font-bold text-2xl italic;
+}
+
+.role {
+    @apply flex flex-row items-center;
+}
+.starGrade {
+    @apply shrink-0 h-8 w-[6.875rem] py-1 px-3 ml-1 rounded-full flex flex-row;
+    background-color: rgba(0, 0, 0, 0.675);
+}
+.starIMG {
+    @apply shrink-0 mx-0.5;
+}
+
+.weaponContainer {
+    @apply mt-1 w-full;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+.weaponIMG {
+    @apply py-1;
+}
+.weaponName {
+    @apply ml-2 font-bold text-lg italic;
+}
+
+.schoolContainer {
+    @apply w-full h-20 mt-1 flex flex-row;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+.schoolDescription {
+    @apply flex flex-col justify-center;
+}
+.schoolName {
+    @apply font-bold text-xl italic tracking-wider;
+}
+.clubName {
+    @apply text-base italic tracking-wider;
+}
+
+.metadataContainer {
+    @apply mt-1 grid grid-cols-2;
+}
+.metadataContainer2 {
+    @apply flex flex-col;
+}
+.metadata {
+    @apply w-full h-12 flex flex-row items-center;
+
+    background-color: rgba(0, 0, 0, 0.3);
+}
+.metadataName {
+    @apply ml-2 text-base flex-grow overflow-hidden whitespace-nowrap text-ellipsis;
+}
+.metadataValue {
+    @apply ml-5 text-base font-bold mr-2 flex-shrink-0;
+}
+
+.introductionContainer {
+    @apply mt-1 p-2 text-base text-justify tracking-wide;
+    background-color: rgba(0, 0, 0, 0.3);
+}

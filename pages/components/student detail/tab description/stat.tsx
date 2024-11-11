@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 
-import { contextDetailStudent } from "../../studentDetail";
+import { contextDetailStudent } from "../../../studentDetail";
 
-import styles from "@/styles/student detail/component.module.css";
+import styles from "@/styles/student detail/tabDescription.module.css";
 
 interface VariableType {
     typeStat: string;
@@ -22,7 +22,7 @@ const Stat = ({ typeStat, nameStat, Level }: VariableType) => {
         } else if (studentData && typeStat === "DefensePower") {
             return Math.round(studentData.DefensePower1 + ((studentData.DefensePower100 - studentData?.DefensePower1) / 99) * (Level - 1));
         } else {
-            return studentData?.[typeStat as keyof typeof studentData];
+            return String(studentData?.[typeStat as keyof typeof studentData]);
         }
     };
 

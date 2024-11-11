@@ -1,0 +1,62 @@
+.studentName {
+    @apply ml-1 font-bold text-2xl italic;
+}
+
+.role {
+    @apply flex flex-row items-center;
+
+    .starGrade {
+        @apply shrink-0 h-8 w-[6.875rem] py-1 px-3 ml-1 rounded-full flex flex-row;
+        background-color: rgba(0, 0, 0, 0.675);
+    }
+    .starIMG {
+        @apply shrink-0 mx-0.5;
+    }
+    .typeSquad {
+        @apply font-bold italic shrink-0 h-6 w-[6.25rem] py-1 px-3 ml-1 rounded-full flex flex-row items-center justify-center;
+    }
+}
+
+.weaponContainer {
+    @apply mt-1 w-full;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+.weaponIMG {
+    @apply py-1;
+}
+
+.skillContainer {
+    @apply mt-1 w-full;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+.skillInfoHeader {
+    @apply w-full h-24 flex flex-row items-center;
+}
+.skillIcon {
+    @apply relative size-24 flex items-center justify-center;
+}
+.skillIconImg {
+    @apply absolute size-20 object-contain z-40;
+}
+.skillIconBG {
+    @apply absolute size-24 object-contain;
+}
+.skillInfoContainer {
+    @apply flex flex-col;
+}
+.skillInfoName {
+    @apply font-bold text-xl;
+}
+.skillInfoType {
+    @apply font-bold text-lg;
+}
+.skillInfoDescription {
+    @apply px-2 text-base text-justify tracking-wide;
+}
+.skillInfoStat {
+    @apply px-2 mb-1 flex flex-row;
+}
+.skillInfoStatCost {
+    @apply w-20 rounded-full font-bold italic text-base text-center;
+    background-color: rgba(0, 0, 0, 0.5);
+}
