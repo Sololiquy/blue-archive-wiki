@@ -1,0 +1,15 @@
+.container {
+    @apply flex my-1;
+}
+
+.circleContainer {
+    @apply w-20 h-20 rounded-l-full flex items-center justify-center;
+
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.circleCenter {
+    @apply size-16 rounded-full flex items-center justify-center;
+    background-color: rgb(227, 227, 227);
+    color: black;
+}

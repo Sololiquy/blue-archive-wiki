@@ -1,0 +1,98 @@
+.studentName {
+    @apply ml-1 font-bold text-2xl italic;
+}
+
+.role {
+    @apply flex flex-row items-center;
+
+    .starGrade {
+        @apply shrink-0 h-8 w-[6.875rem] py-1 px-3 ml-1 rounded-full flex flex-row;
+        background-color: rgba(0, 0, 0, 0.675);
+    }
+    .starIMG {
+        @apply shrink-0 mx-0.5;
+    }
+    .typeSquad {
+        @apply font-bold italic shrink-0 h-6 w-[6.25rem] py-1 px-3 ml-1 rounded-full flex flex-row items-center justify-center;
+    }
+}
+
+.weaponContainer {
+    @apply mt-1 w-full;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+.weaponIMG {
+    @apply py-1;
+}
+
+.container3 {
+    @apply mt-1 w-full flex flex-row;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.container4 {
+    @apply mt-1 w-full h-[324px] flex flex-row;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+.studentStat {
+    @apply w-48 mr-1;
+}
+.studentEquipment {
+    @apply w-full h-full overflow-hidden flex flex-col;
+}
+.separator {
+    @apply px-2 flex flex-grow justify-center items-center;
+    color: white;
+}
+
+.roundedContainer {
+    @apply shrink-0 w-12 h-12 mr-1 rounded-full flex items-center place-content-center;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.attackTypeImg,
+.defenseTypeImg {
+    @apply w-4/6 h-4/6 object-contain;
+}
+
+.statContainer {
+    @apply flex items-center w-48;
+
+    .name {
+        @apply flex-grow overflow-hidden whitespace-nowrap text-ellipsis;
+    }
+
+    .value {
+        @apply ml-5 mr-2 flex-shrink-0;
+    }
+}
+
+.terrainContainer {
+    @apply shrink-0 flex w-24 min-w-12 h-12 mr-1 items-center;
+
+    background-color: rgba(0, 0, 0, 0.3);
+
+    .terrainImg {
+        @apply w-full h-full object-contain;
+    }
+
+    .terrainValue {
+        @apply w-4/5 h-4/5 mr-1 object-contain;
+    }
+}
+
+/* equipment.tsx */
+
+.equipmentContainer {
+    @apply m-1.5 h-16 grow-0 flex flex-row;
+}
+.containerImg {
+    @apply flex size-16 rounded-full justify-center items-center;
+    background-color: rgb(140, 147, 158);
+}
+.equipmentImg {
+    @apply object-contain;
+}
+.equipmentLevel {
+    @apply w-10 h-10 self-center;
+}
