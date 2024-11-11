@@ -19,7 +19,7 @@ const SkillDescription = () => {
             <div className={styles.role}>
                 <div className={styles.starGrade}>
                     {[...Array(studentData?.StarGrade)].map((_, i) => (
-                        <img className={styles.starIMG} key={i} src="/star.svg" alt="" />
+                        <img className={styles.starIMG} key={i} src="/blue-archive-wiki/star.svg" alt="" />
                     ))}
                 </div>
                 <div className={`${styles.typeSquad} ${squadType[0]}`}>{squadType[1]}</div>
