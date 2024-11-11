@@ -20,7 +20,7 @@ const Skill = ({ type }: { type: number }) => {
                 <div className={styles.skillInfoHeader}>
                     <div className={styles.skillIcon}>
                         <img className={styles.skillIconImg} src={skillImgURL} alt="" />
-                        <img className={styles.skillIconBG} src="/stage-tile.svg" alt="" />
+                        <img className={styles.skillIconBG} src="/blue-archive-wiki/stage-tile.svg" alt="" />
                     </div>
                     <div>
                         <div className={styles.skillInfoName}>{studentData?.Skills[skillType]?.Name}</div>
