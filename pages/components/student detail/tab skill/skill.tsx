@@ -45,7 +45,7 @@ const Skill = ({ type, level }: VariableType) => {
                 <div className={styles.skillInfoHeader}>
                     <div className={styles.skillIcon}>
                         <img className={styles.skillIconImg} src={skillImgURL} alt="" />
-                        <img className={styles.skillIconBG} src={`/blue-archive-wiki/bg-icon ${attackType[1]}.svg`} alt="" />
+                        <img className={styles.skillIconBG} src={`/blue-archive-wiki/bg-icon_${attackType[1]}.svg`} alt="" />
                     </div>
                     <div>
                         <div className={styles.skillInfoName}>{Skill?.Name}</div>
