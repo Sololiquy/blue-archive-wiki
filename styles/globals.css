@@ -44,3 +44,16 @@ body {
 .elasticArmorColor {
     background-color: rgb(148, 49, 165) !important;
 }
+
+.explosiveAttackFontColor {
+    color: red !important;
+}
+.piercingAttackFontColor {
+    color: rgb(255, 136, 0) !important;
+}
+.mysticAttackFontColor {
+    color: rgb(0, 162, 255) !important;
+}
+.sonicAttackFontColor {
+    color: rgb(217, 0, 255) !important;
+}

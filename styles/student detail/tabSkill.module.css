@@ -26,7 +26,7 @@
 }
 
 .skillContainer {
-    @apply mt-1 w-full;
+    @apply mt-1 w-full overflow-y-auto;
     background-color: rgba(0, 0, 0, 0.3);
 }
 .skillInfoHeader {
@@ -51,7 +51,7 @@
     @apply font-bold text-lg;
 }
 .skillInfoDescription {
-    @apply px-2 text-base text-justify tracking-wide;
+    @apply pl-2 pr-4 text-base text-justify tracking-wide;
 }
 .skillInfoStat {
     @apply px-2 mb-1 flex flex-row;

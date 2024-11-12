@@ -26,14 +26,13 @@ interface VariableType {
         Name: string;
     };
     Skills: {
-        [key: number]: {
-            Icon: string;
-            Name: string;
-            SkillType: number;
-            Desc: string;
-            Cost: number[];
-        };
-    };
+        Icon: string;
+        Name: string;
+        SkillType: string;
+        Desc: string;
+        Cost?: number[];
+        Parameters: string[];
+    }[];
     Club: string;
     School: string;
     TacticRole: string;
@@ -92,16 +91,19 @@ const StudentDetail = () => {
                 </div>
                 <div className={styles.descriptionContainer}>
                     <div className={styles.tabDescriptionContainer}>
-                        <Tab onClick={() => handleTabClick(1)} active={tabIndex === 1} label="1" />
-                        <Tab onClick={() => handleTabClick(2)} active={tabIndex === 2} label="2" />
-                        <Tab onClick={() => handleTabClick(3)} active={tabIndex === 3} label="3" />
+                        <Tab onClick={() => handleTabClick(1)} active={tabIndex === 1} label="Stat" />
+                        <Tab onClick={() => handleTabClick(2)} active={tabIndex === 2} label="Skill" />
+                        <Tab onClick={() => handleTabClick(3)} active={tabIndex === 3} label="Profile" />
                     </div>
-                    <div className={styles.contentDescriptionContainer}>
-                        <contextDetailStudent.Provider value={{ studentData: studentData as unknown as VariableType }}>
-                            {tabIndex === 1 && <StatDescription />}
-                            {tabIndex === 2 && <SkillDescription />}
-                            {tabIndex === 3 && <ProfileDescription />}
-                        </contextDetailStudent.Provider>
+
+                    <div className={styles.contentDescriptionContainerScroll}>
+                        <div className={styles.contentDescriptionContainer}>
+                            <contextDetailStudent.Provider value={{ studentData: studentData as unknown as VariableType }}>
+                                {tabIndex === 1 && <StatDescription />}
+                                {tabIndex === 2 && <SkillDescription />}
+                                {tabIndex === 3 && <ProfileDescription />}
+                            </contextDetailStudent.Provider>
+                        </div>
                     </div>
                 </div>
             </div>
