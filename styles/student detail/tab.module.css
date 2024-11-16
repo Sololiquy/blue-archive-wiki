@@ -13,3 +13,11 @@
     background-color: rgb(227, 227, 227);
     color: black;
 }
+
+/* voice tab */
+
+.tabVoice {
+    @apply w-24 h-8 m-1 rounded-md flex items-center justify-center;
+
+    background-color: rgba(0, 0, 0, 0.3);
+}

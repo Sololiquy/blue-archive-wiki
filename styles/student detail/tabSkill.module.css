@@ -51,7 +51,7 @@
     @apply font-bold text-lg;
 }
 .skillInfoDescription {
-    @apply pl-2 pr-4 text-base text-justify tracking-wide;
+    @apply pl-2 pr-4 text-base text-justify;
 }
 .skillInfoStat {
     @apply px-2 mb-1 flex flex-row;

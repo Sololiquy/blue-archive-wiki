@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 
 import styles from "@/styles/student detail/tab.module.css";
 
@@ -8,7 +8,7 @@ interface TabProps {
     label: string;
 }
 
-const Tab: React.FC<TabProps> = ({ onClick, active, label }) => {
+const Tab: FC<TabProps> = ({ onClick, active, label }) => {
     return (
         <div className={styles.container}>
             <div className={`${styles.circleContainer} ${active ? styles.active : ""}`} onClick={onClick}>

@@ -1,17 +1,29 @@
 import { useRouter } from "next/router";
 import React, { useContext, createContext, useState } from "react";
-
 import StatDescription from "./components/student detail/tab description/statDescription";
 import SkillDescription from "./components/student detail/tab skill/skillDescription";
 import ProfileDescription from "./components/student detail/tab Profile/profileDescription";
+import VoiceDescription from "./components/student detail/tab voice/voiceDescription";
 import Tab from "./components/student detail/tab";
-
 import styles from "@/styles/student detail/studentDetail.module.css";
-
 import { contextAPI } from "./_app";
+
+interface VoiceData {
+    Group: string;
+    Transcription: string;
+    AudioClip: string;
+}
+
+interface StudentVoiceData {
+    Battle: VoiceData[];
+    Event: VoiceData[];
+    Lobby: VoiceData[];
+    Normal: VoiceData[];
+}
 
 interface ContextType {
     studentData: VariableType | null;
+    studentvoiceData: StudentVoiceData | null;
 }
 
 interface VariableType {
@@ -57,18 +69,25 @@ interface VariableType {
     Designer: string;
     Illustrator: string;
     ProfileIntroduction: string;
+    Battle: string[];
+    Event: string[];
+    Lobby: string[];
+    Normal: string[];
 }
 
 export const contextDetailStudent = createContext<ContextType>({
     studentData: null,
+    studentvoiceData: null,
 });
 
 const StudentDetail = () => {
     const { query } = useRouter();
     const ID = Number(query.id);
     const [tabIndex, setTabIndex] = useState(1);
-    const { studentDefaultDataAPI } = useContext(contextAPI);
+    const { studentDefaultDataAPI, voiceDataAPI } = useContext(contextAPI);
     const studentData = studentDefaultDataAPI?.find((student) => student.Id === ID);
+    const studentvoiceData = voiceDataAPI ? (voiceDataAPI[ID] as unknown as StudentVoiceData | null) : null;
+
     if (!studentData) {
         return <div>Student not found</div>;
     }
@@ -94,14 +113,16 @@ const StudentDetail = () => {
                         <Tab onClick={() => handleTabClick(1)} active={tabIndex === 1} label="Stat" />
                         <Tab onClick={() => handleTabClick(2)} active={tabIndex === 2} label="Skill" />
                         <Tab onClick={() => handleTabClick(3)} active={tabIndex === 3} label="Profile" />
+                        <Tab onClick={() => handleTabClick(4)} active={tabIndex === 4} label="Voice" />
                     </div>
 
                     <div className={styles.contentDescriptionContainerScroll}>
                         <div className={styles.contentDescriptionContainer}>
-                            <contextDetailStudent.Provider value={{ studentData: studentData as unknown as VariableType }}>
+                            <contextDetailStudent.Provider value={{ studentData: studentData as VariableType, studentvoiceData }}>
                                 {tabIndex === 1 && <StatDescription />}
                                 {tabIndex === 2 && <SkillDescription />}
                                 {tabIndex === 3 && <ProfileDescription />}
+                                {tabIndex === 4 && <VoiceDescription />}
                             </contextDetailStudent.Provider>
                         </div>
                     </div>
