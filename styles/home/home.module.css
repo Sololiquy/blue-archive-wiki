@@ -1,0 +1,17 @@
+.background {
+    @apply fixed inset-0 w-full h-full z-[-1];
+    background-color: black;
+}
+
+.container {
+    @apply fixed inset-0 w-full h-full flex flex-col justify-center items-center;
+}
+
+.arona {
+    @apply rounded-[150px];
+}
+
+.text {
+    @apply text-6xl italic font-semibold tracking-widest;
+    color: white;
+}

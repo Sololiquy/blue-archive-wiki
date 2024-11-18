@@ -6,6 +6,9 @@ const Header = () => {
     return (
         <>
             <div className={styles.headerContainer}>
+                <div className={styles.logo}>
+                    <img className={styles.logoIMG} src="/blue-archive-wiki/Blue_Archive_EN_logo.svg" alt="" />
+                </div>
                 <div className={styles.Home}>
                     <Link href="/">Home</Link>
                 </div>
