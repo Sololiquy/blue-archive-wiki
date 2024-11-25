@@ -2,11 +2,17 @@ import React, { useContext } from "react";
 import styles from "@/styles/student detail/tabProfile.module.css";
 
 import { contextDetailStudent } from "../../../studentDetail";
+import { contextAPI } from "../../../_app";
 
 const ProfileDescription = () => {
     const { studentData } = useContext(contextDetailStudent);
+    const { localizationAPI } = useContext(contextAPI);
+    const school = localizationAPI?.SchoolLong[studentData?.School as keyof typeof localizationAPI.SchoolLong];
+    const club = localizationAPI?.Club[studentData?.Club as keyof typeof localizationAPI.Club];
+
     const studentWeaponURL = `https://raw.githubusercontent.com/SchaleDB/SchaleDB/main/images/weapon/${studentData?.WeaponImg}.webp`;
     const studentSchoolURL = `https://raw.githubusercontent.com/SchaleDB/SchaleDB/main/images/schoolicon/School_Icon_${studentData?.School?.toUpperCase()}_W.png`;
+
     return (
         <>
             <div className={styles.studentName}>
@@ -26,8 +32,8 @@ const ProfileDescription = () => {
             <div className={styles.schoolContainer}>
                 <img className={styles.schoolIMG} src={studentSchoolURL} alt="" />
                 <div className={styles.schoolDescription}>
-                    <div className={styles.schoolName}>{studentData?.School}</div>
-                    <div className={styles.clubName}>{studentData?.Club}</div>
+                    <div className={styles.schoolName}>{school}</div>
+                    <div className={styles.clubName}>{club}</div>
                 </div>
             </div>
             <div className={styles.metadataContainer}>

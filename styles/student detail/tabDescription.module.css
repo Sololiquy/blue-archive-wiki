@@ -4,17 +4,17 @@
 
 .role {
     @apply flex flex-row items-center;
+}
+.starGrade {
+    @apply shrink-0 h-7 px-3 ml-1 rounded-full flex flex-row justify-center items-center;
+    background-color: rgba(0, 0, 0, 0.675);
+}
+.starIMG {
+    @apply h-5 shrink-0 mx-0.5;
+}
 
-    .starGrade {
-        @apply shrink-0 h-8 w-[6.875rem] py-1 px-3 ml-1 rounded-full flex flex-row;
-        background-color: rgba(0, 0, 0, 0.675);
-    }
-    .starIMG {
-        @apply shrink-0 mx-0.5;
-    }
-    .typeSquad {
-        @apply font-bold italic shrink-0 h-6 w-[6.25rem] py-1 px-3 ml-1 rounded-full flex flex-row items-center justify-center;
-    }
+.typeSquad {
+    @apply font-bold italic shrink-0 h-6 w-[6.25rem] py-1 px-3 ml-1 rounded-full flex flex-row items-center justify-center;
 }
 
 .weaponContainer {
@@ -24,25 +24,40 @@
 .weaponIMG {
     @apply py-1;
 }
+.levelWeaponContainer {
+    @apply h-7 flex flex-row items-center;
+}
+.tierWeaponContainer {
+    @apply w-8 h-5 ml-1 rounded-full flex items-center justify-center;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: rgba(255, 255, 255, 0.3);
+}
+.tierWeaponContainerActived {
+    @apply font-bold;
+    background-color: rgb(255, 255, 255);
+    color: black;
+}
 
 .container3 {
     @apply mt-1 w-full flex flex-row;
     background-color: rgba(0, 0, 0, 0.3);
 }
 
-.container4 {
-    @apply mt-1 w-full h-[324px] flex flex-row;
+.studentStatContainer {
+    @apply mt-1 w-full grid grid-rows-4 grid-flow-col;
     background-color: rgba(0, 0, 0, 0.3);
 }
-.studentStat {
-    @apply w-48 mr-1;
-}
-.studentEquipment {
-    @apply w-full h-full overflow-hidden flex flex-col;
+
+.studentEquipmentContainer {
+    @apply w-full h-full mt-1 overflow-hidden flex flex-row;
+    background-color: rgba(0, 0, 0, 0.3);
 }
 .separator {
-    @apply px-2 flex flex-grow justify-center items-center;
-    color: white;
+    @apply px-1 py-1 flex flex-grow justify-center items-center;
+}
+.separatorLine {
+    @apply h-full;
+    border-left: 1px solid rgb(255, 255, 255);
 }
 
 .roundedContainer {
@@ -55,17 +70,19 @@
     @apply w-4/6 h-4/6 object-contain;
 }
 
+/* stat.tsx */
+
 .statContainer {
-    @apply flex items-center w-48;
-
-    .name {
-        @apply flex-grow overflow-hidden whitespace-nowrap text-ellipsis;
-    }
-
-    .value {
-        @apply ml-5 mr-2 flex-shrink-0;
-    }
+    @apply w-full flex items-center;
 }
+.name {
+    @apply flex-grow overflow-hidden whitespace-nowrap text-ellipsis;
+}
+.value {
+    @apply ml-5 mr-2 flex-shrink-0;
+}
+
+/* .terrain.tsx */
 
 .terrainContainer {
     @apply shrink-0 flex w-24 min-w-12 h-12 mr-1 items-center;
@@ -94,5 +111,5 @@
     @apply object-contain;
 }
 .equipmentLevel {
-    @apply w-10 h-10 self-center;
+    @apply w-8 h-10 self-center;
 }

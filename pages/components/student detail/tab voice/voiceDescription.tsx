@@ -28,11 +28,8 @@ const VoiceDescription = () => {
             <div>
                 <div>
                     {voicetabIndex === 1 && studentvoiceData?.Battle?.length > 0 ? studentvoiceData.Battle.map((voice, index) => <Voice key={index} voice={voice} />) : null}
-
                     {voicetabIndex === 2 && studentvoiceData?.Event?.length > 0 ? studentvoiceData.Event.map((voice, index) => <Voice key={index} voice={voice} />) : null}
-
                     {voicetabIndex === 3 && studentvoiceData?.Lobby?.length > 0 ? studentvoiceData.Lobby.map((voice, index) => <Voice key={index} voice={voice} />) : null}
-
                     {voicetabIndex === 4 && studentvoiceData?.Normal?.length > 0 ? studentvoiceData.Normal.map((voice, index) => <Voice key={index} voice={voice} />) : null}
                 </div>
             </div>

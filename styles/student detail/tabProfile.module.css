@@ -6,11 +6,11 @@
     @apply flex flex-row items-center;
 }
 .starGrade {
-    @apply shrink-0 h-8 w-[6.875rem] py-1 px-3 ml-1 rounded-full flex flex-row;
+    @apply shrink-0 h-7 px-3 ml-1 rounded-full flex flex-row justify-center items-center;
     background-color: rgba(0, 0, 0, 0.675);
 }
 .starIMG {
-    @apply shrink-0 mx-0.5;
+    @apply h-5 shrink-0 mx-0.5;
 }
 
 .weaponContainer {

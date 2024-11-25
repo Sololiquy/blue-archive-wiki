@@ -11,7 +11,7 @@ interface TabProps {
 const VoiceTab: FC<TabProps> = ({ onClick, active, label }) => {
     return (
         <>
-            <div className={`${styles.tabVoice} ${active ? styles.active : ""}`} onClick={onClick}>
+            <div className={`${styles.tabVoice} ${active ? styles.tabVoiceActive : ""}`} onClick={onClick}>
                 {label}
             </div>
         </>

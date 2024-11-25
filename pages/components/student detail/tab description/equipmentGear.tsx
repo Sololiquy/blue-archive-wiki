@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
+import React, { ChangeEvent, useContext, useEffect, useState } from "react";
 
 import styles from "@/styles/student detail/tabDescription.module.css";
 
@@ -6,7 +6,7 @@ import { contextDetailStudent } from "../../../studentDetail";
 
 interface VariableType {
     levelEquipmentGear: number;
-    setLevelEquipmentGear: Dispatch<SetStateAction<number>>;
+    setLevelEquipmentGear: (value: number) => void;
 }
 
 const EquipmentGear = ({ levelEquipmentGear, setLevelEquipmentGear }: VariableType) => {
@@ -26,7 +26,7 @@ const EquipmentGear = ({ levelEquipmentGear, setLevelEquipmentGear }: VariableTy
         if (equipmentURL) check(equipmentURL);
     }, [equipmentURL]);
 
-    const handleLevelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleLevelChange = (e: ChangeEvent<HTMLInputElement>) => {
         setLevelEquipmentGear(parseInt(e.target.value));
     };
     return (

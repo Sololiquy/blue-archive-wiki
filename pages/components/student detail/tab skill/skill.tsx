@@ -11,6 +11,7 @@ interface VariableType {
 const Skill = ({ type, level }: VariableType) => {
     const { studentData } = useContext(contextDetailStudent);
     const { localizationAPI } = useContext(contextAPI);
+    const skillType = localizationAPI?.ui[`student_skill_${type}` as keyof typeof localizationAPI.ui];
 
     const Skill = studentData?.Skills.find((skill) => skill.SkillType === type);
     const parameter1 = Skill?.Parameters?.[0]?.[level - 1] || "";
@@ -29,7 +30,7 @@ const Skill = ({ type, level }: VariableType) => {
 
     // REGEX for desription-----------------------------------------------------------------------------------------------------------
 
-    const formattedDesc = Skill?.Desc?.replace(/<\?1>/g, `<span class="${attackType[0]}" style="${styleFont}">${parameter1}</span>`)
+    const description = Skill?.Desc?.replace(/<\?1>/g, `<span class="${attackType[0]}" style="${styleFont}">${parameter1}</span>`)
         .replace(/<\?2>/g, `<span class="${attackType[0]}" style="${styleFont}">${parameter2}</span>`)
         .replace(/<\?3>/g, `<span class="${attackType[0]}" style="${styleFont}">${parameter3}</span>`)
         .replace(/<(\w+):(\w+)>/g, (_, effect, typeEffect) => {
@@ -58,10 +59,10 @@ const Skill = ({ type, level }: VariableType) => {
                 </div>
                 <div>
                     <div className={styles.skillInfoName}>{Skill?.Name}</div>
-                    <div className={styles.skillInfoType}>{Skill?.SkillType}</div>
+                    <div className={styles.skillInfoType}>{type === "ex" ? "Ex Skill" : skillType}</div>
                 </div>
             </div>
-            <div className={styles.skillInfoDescription} dangerouslySetInnerHTML={{ __html: formattedDesc ?? "" }}></div>
+            <div className={styles.skillInfoDescription} dangerouslySetInnerHTML={{ __html: description ?? "" }}></div>
             {type === "ex" && (
                 <div className={styles.skillInfoStat}>
                     <div className={styles.skillInfoStatCost}>{`${Skill?.Cost?.[level - 1] || "N/A"} COST`}</div>

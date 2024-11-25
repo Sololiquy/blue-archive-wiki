@@ -24,6 +24,7 @@ interface StudentVoiceData {
 interface ContextType {
     studentData: VariableType | null;
     studentvoiceData: StudentVoiceData | null;
+    tierWeapon: number;
 }
 
 interface VariableType {
@@ -36,6 +37,14 @@ interface VariableType {
     WeaponImg: string;
     Weapon: {
         Name: string;
+        MaxHP1: number;
+        MaxHP100: number;
+        AttackPower1: number;
+        AttackPower100: number;
+        HealPower1: number;
+        HealPower100: number;
+        AdaptationValue: number;
+        AdaptationType: string;
     };
     Skills: {
         Icon: string;
@@ -61,6 +70,8 @@ interface VariableType {
     AttackPower100: number;
     DefensePower1: number;
     DefensePower100: number;
+    HealPower1: number;
+    HealPower100: number;
     Birthday: string;
     CharacterAge: number;
     CharHeightMetric: number;
@@ -78,12 +89,14 @@ interface VariableType {
 export const contextDetailStudent = createContext<ContextType>({
     studentData: null,
     studentvoiceData: null,
+    tierWeapon: 0,
 });
 
 const StudentDetail = () => {
     const { query } = useRouter();
     const ID = Number(query.id);
     const [tabIndex, setTabIndex] = useState(1);
+    const [tierWeapon, setTierWeapon] = useState(0);
     const { studentDefaultDataAPI, voiceDataAPI } = useContext(contextAPI);
     const studentData = studentDefaultDataAPI?.find((student) => student.Id === ID);
     const studentvoiceData = voiceDataAPI ? (voiceDataAPI[ID] as unknown as StudentVoiceData | null) : null;
@@ -94,6 +107,9 @@ const StudentDetail = () => {
 
     const handleTabClick = (index: number) => {
         setTabIndex(index);
+    };
+    const handleTierWeaponChange = (index: number) => {
+        setTierWeapon(index);
     };
 
     const studentSpriteURL = `https://raw.githubusercontent.com/SchaleDB/SchaleDB/main/images/student/portrait/${studentData.Id}.webp`;
@@ -118,9 +134,9 @@ const StudentDetail = () => {
 
                     <div className={styles.contentDescriptionContainerScroll}>
                         <div className={styles.contentDescriptionContainer}>
-                            <contextDetailStudent.Provider value={{ studentData: studentData as VariableType, studentvoiceData }}>
-                                {tabIndex === 1 && <StatDescription />}
-                                {tabIndex === 2 && <SkillDescription />}
+                            <contextDetailStudent.Provider value={{ studentData: studentData as unknown as VariableType, studentvoiceData, tierWeapon }}>
+                                {tabIndex === 1 && <StatDescription onTierWeaponChange={handleTierWeaponChange} />}
+                                {tabIndex === 2 && <SkillDescription onTierWeaponChange={handleTierWeaponChange} />}
                                 {tabIndex === 3 && <ProfileDescription />}
                                 {tabIndex === 4 && <VoiceDescription />}
                             </contextDetailStudent.Provider>

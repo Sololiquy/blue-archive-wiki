@@ -5,6 +5,9 @@ import { useEffect, useState, createContext, Dispatch, SetStateAction } from "re
 
 interface LocalizationAPI {
     BuffName: Record<string, string>;
+    ui: Record<string, string>;
+    Club: Record<string, string>;
+    SchoolLong: Record<string, string>;
 }
 
 interface ContextType {
@@ -24,6 +27,8 @@ interface VariableType {
     Id: number;
     Name: string;
     School: string;
+    Category: string;
+    Tier: number;
 }
 
 export const contextAPI = createContext<ContextType>({

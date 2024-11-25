@@ -5,16 +5,36 @@ import Equipment from "./equipment";
 import EquipmentGear from "./equipmentGear";
 
 import { contextDetailStudent } from "../../../studentDetail";
+import { contextAPI } from "../../../_app";
 
-import React, { useContext, useState } from "react";
+import React, { ChangeEvent, FC, useContext, useEffect, useState } from "react";
 
-const StatDescription = ({}) => {
-    const { studentData } = useContext(contextDetailStudent);
+interface StatDescriptionProps {
+    onTierWeaponChange: (index: number) => void;
+}
+
+const StatDescription: FC<StatDescriptionProps> = ({ onTierWeaponChange }) => {
+    const { studentData, tierWeapon } = useContext(contextDetailStudent);
+
+    const { equipmentDataAPI } = useContext(contextAPI);
     const [level, setLevel] = useState(1);
-    const [levelEquipment1, setLevelEquipment1] = useState(1);
-    const [levelEquipment2, setLevelEquipment2] = useState(1);
-    const [levelEquipment3, setLevelEquipment3] = useState(1);
-    const [levelEquipmentGear, setLevelEquipmentGear] = useState(0);
+    const [levelWeapon, setLevelWeapon] = useState(1);
+    const [levelEquipment, setLevelEquipment] = useState([1, 1, 1, 0]);
+    const [equipments, setEquipments] = useState<(unknown | null)[]>([null, null, null]);
+
+    useEffect(() => {
+        if (studentData?.Equipment && studentData.Equipment.length > 0) {
+            const findEquipment = (category: string, tier: number) => equipmentDataAPI?.find((equipment) => equipment.Category === category && equipment.Tier === tier);
+
+            const newEquipments = [
+                findEquipment(studentData.Equipment[0], levelEquipment[0]) ?? null,
+                findEquipment(studentData.Equipment[1], levelEquipment[1]) ?? null,
+                findEquipment(studentData.Equipment[2], levelEquipment[2]) ?? null,
+            ];
+
+            setEquipments(newEquipments);
+        }
+    }, [studentData, equipmentDataAPI, levelEquipment]);
 
     console.log(studentData);
     if (!studentData) return <div>Loading...</div>;
@@ -43,8 +63,11 @@ const StatDescription = ({}) => {
         Support: ["specialRoleColor", "SUPPORT"],
     }[studentData?.SquadType as "Main" | "Support"];
 
-    const handleLevelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleLevelChange = (e: ChangeEvent<HTMLInputElement>) => {
         setLevel(parseInt(e.target.value));
+    };
+    const handleLevelWeaponChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setLevelWeapon(parseInt(e.target.value));
     };
 
     return (
@@ -60,6 +83,19 @@ const StatDescription = ({}) => {
             </div>
             <div className={styles.weaponContainer}>
                 <img className={styles.weaponIMG} src={studentWeaponURL} alt="" />
+                <div className={styles.levelWeaponContainer}>
+                    <div className={`${styles.tierWeaponContainer} ${tierWeapon >= 1 ? styles.tierWeaponContainerActived : ""}`} onClick={() => onTierWeaponChange(1)}>
+                        T1
+                    </div>
+                    <div className={`${styles.tierWeaponContainer} ${tierWeapon >= 2 ? styles.tierWeaponContainerActived : ""}`} onClick={() => onTierWeaponChange(2)}>
+                        T2
+                    </div>
+                    <div className={`${styles.tierWeaponContainer} ${tierWeapon >= 3 ? styles.tierWeaponContainerActived : ""}`} onClick={() => onTierWeaponChange(3)}>
+                        T3
+                    </div>
+                    <input type="range" value={levelWeapon} min="1" max="50" onChange={handleLevelWeaponChange} />
+                    {levelWeapon}
+                </div>
             </div>
             <div className={styles.container3}>
                 <div className={styles.roundedContainer}>
@@ -75,27 +111,67 @@ const StatDescription = ({}) => {
                 <Terrain terrainType="Outdoor" terrainValue={Number(studentData?.OutdoorBattleAdaptation) ?? 0} />
                 <Terrain terrainType="Indoor" terrainValue={Number(studentData?.IndoorBattleAdaptation) ?? 0} />
             </div>
-            <div className={styles.container4}>
-                <div className={styles.studentStat}>
-                    <Stat typeStat="MaxHP" nameStat="Max HP" Level={level} />
-                    <Stat typeStat="AttackPower" nameStat="Attack" Level={level} />
-                    <Stat typeStat="DefensePower" nameStat="Defense" Level={level} />
-                    <Stat typeStat="DodgePoint" nameStat="Evasion" Level={level} />
-                    <Stat typeStat="CriticalPoint" nameStat="Crit Rate" Level={level} />
-                    <Stat typeStat="CriticalDamageRate" nameStat="Crit Dmg" Level={level} />
-                </div>
-                <div className={styles.studentEquipment}>
-                    <Equipment typeEquipment={0} levelEquipment={levelEquipment1} setLevelEquipment={setLevelEquipment1} />
-                    <Equipment typeEquipment={1} levelEquipment={levelEquipment2} setLevelEquipment={setLevelEquipment2} />
-                    <Equipment typeEquipment={2} levelEquipment={levelEquipment3} setLevelEquipment={setLevelEquipment3} />
-                    <div className={styles.separator}>
-                        <hr className="w-full" />
-                    </div>
-                    <EquipmentGear levelEquipmentGear={levelEquipmentGear} setLevelEquipmentGear={setLevelEquipmentGear} />
-                </div>
+            <div className={styles.studentStatContainer}>
+                <Stat typeStat="MaxHP" nameStat="Max HP" equipment={equipments} Level={level} levelWeapon={levelWeapon} />
+                <Stat typeStat="AttackPower" nameStat="Attack" equipment={equipments} Level={level} levelWeapon={levelWeapon} />
+                <Stat typeStat="DefensePower" nameStat="Defense" equipment={equipments} Level={level} levelWeapon={levelWeapon} />
+                <Stat typeStat="DodgePoint" nameStat="Evasion" equipment={equipments} Level={level} levelWeapon={levelWeapon} />
+                <Stat typeStat="CriticalPoint" nameStat="Crit Rate" equipment={equipments} Level={level} levelWeapon={levelWeapon} />
+                <Stat typeStat="CriticalDamageRate" nameStat="Crit Dmg" equipment={equipments} Level={level} levelWeapon={levelWeapon} />
+                <Stat typeStat="HealPower" nameStat="Healing" equipment={equipments} Level={level} levelWeapon={levelWeapon} />
             </div>
-            <input type="range" value={level} min="1" max="100" onChange={handleLevelChange} />
-            <div>{level}</div>
+            <div className={styles.studentEquipmentContainer}>
+                <Equipment
+                    typeEquipment={0}
+                    levelEquipment={levelEquipment[0]}
+                    setLevelEquipment={(value: number) =>
+                        setLevelEquipment((prev) => {
+                            const updated = [...prev];
+                            updated[0] = value;
+                            return updated;
+                        })
+                    }
+                />
+                <Equipment
+                    typeEquipment={1}
+                    levelEquipment={levelEquipment[1]}
+                    setLevelEquipment={(value: number) =>
+                        setLevelEquipment((prev) => {
+                            const updated = [...prev];
+                            updated[1] = value;
+                            return updated;
+                        })
+                    }
+                />
+                <Equipment
+                    typeEquipment={2}
+                    levelEquipment={levelEquipment[2]}
+                    setLevelEquipment={(value: number) =>
+                        setLevelEquipment((prev) => {
+                            const updated = [...prev];
+                            updated[2] = value;
+                            return updated;
+                        })
+                    }
+                />
+                <div className={styles.separator}>
+                    <div className={styles.separatorLine}></div>
+                </div>
+                <EquipmentGear
+                    levelEquipmentGear={levelEquipment[3]}
+                    setLevelEquipmentGear={(value: number) =>
+                        setLevelEquipment((prev) => {
+                            const updated = [...prev];
+                            updated[3] = value;
+                            return updated;
+                        })
+                    }
+                />
+            </div>
+            <span>
+                <input type="range" value={level} min="1" max="100" onChange={handleLevelChange} />
+                {level}
+            </span>
         </>
     );
 };

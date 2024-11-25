@@ -1,11 +1,11 @@
-import React, { Dispatch, SetStateAction, useContext } from "react";
+import React, { useContext } from "react";
 import styles from "@/styles/student detail/tabDescription.module.css";
 import { contextDetailStudent } from "../../../studentDetail";
 
 interface EquipmentProps {
     typeEquipment: number;
     levelEquipment: number;
-    setLevelEquipment: Dispatch<SetStateAction<number>>;
+    setLevelEquipment: (value: number) => void;
 }
 
 const Equipment = ({ typeEquipment, levelEquipment, setLevelEquipment }: EquipmentProps) => {

@@ -1,4 +1,7 @@
 import styles from "@/styles/student detail/tabDescription.module.css";
+import { useContext } from "react";
+
+import { contextDetailStudent } from "../../../studentDetail";
 
 interface VariableType {
     terrainType: string;
@@ -6,7 +9,17 @@ interface VariableType {
 }
 
 const Terrain = ({ terrainType, terrainValue }: VariableType) => {
+    const { studentData, tierWeapon } = useContext(contextDetailStudent);
     const terrainImg = `https://raw.githubusercontent.com/SchaleDB/SchaleDB/main/images/ui/Terrain_${terrainType}.png`;
+
+    let trueTerrainValue = terrainValue;
+    if (tierWeapon >= 3) {
+        if (terrainType === studentData?.Weapon?.AdaptationType) {
+            trueTerrainValue = studentData?.Weapon?.AdaptationValue + terrainValue;
+        } else {
+            trueTerrainValue = terrainValue;
+        }
+    }
 
     const Mood = () => {
         const y: { [key: number]: string } = {
@@ -17,7 +30,7 @@ const Terrain = ({ terrainType, terrainValue }: VariableType) => {
             4: "S",
             5: "SS",
         };
-        const x = y[terrainValue];
+        const x = y[trueTerrainValue];
         return `https://raw.githubusercontent.com/SchaleDB/SchaleDB/main/images/ui/Ingame_Emo_Adaptresult${x}.png`;
     };
 
