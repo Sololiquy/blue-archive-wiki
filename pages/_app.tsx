@@ -3,44 +3,6 @@ import type { AppProps } from "next/app";
 import Header from "./components/home/header";
 import { useEffect, useState, createContext, Dispatch, SetStateAction } from "react";
 
-interface LocalizationAPI {
-    BuffName: Record<string, string>;
-    ui: Record<string, string>;
-    Club: Record<string, string>;
-    SchoolLong: Record<string, string>;
-}
-
-interface ContextType {
-    localizationAPI: LocalizationAPI | null;
-    studentDataAPI: VariableType[] | null;
-    setStudentDataAPI: Dispatch<SetStateAction<VariableType[] | null>>;
-    studentDefaultDataAPI: VariableType[] | null;
-    voiceDataAPI: VariableType[] | null;
-    equipmentDataAPI: VariableType[] | null;
-    setEquipmentDataAPI: Dispatch<SetStateAction<VariableType[] | null>>;
-}
-
-interface VariableType {
-    ArmorType: string;
-    CollectionBG: string;
-    Equipment: string;
-    Id: number;
-    Name: string;
-    School: string;
-    Category: string;
-    Tier: number;
-}
-
-export const contextAPI = createContext<ContextType>({
-    localizationAPI: null,
-    studentDataAPI: null,
-    setStudentDataAPI: () => {},
-    studentDefaultDataAPI: null,
-    voiceDataAPI: null,
-    equipmentDataAPI: null,
-    setEquipmentDataAPI: () => {},
-});
-
 export default function App({ Component, pageProps }: AppProps) {
     const [localizationAPI, setLocalizationAPI] = useState<LocalizationAPI | null>(null);
     const [studentDataAPI, setStudentDataAPI] = useState<VariableType[] | null>(null);
@@ -66,7 +28,7 @@ export default function App({ Component, pageProps }: AppProps) {
                 setVoiceDataAPI(dataVoice);
                 setEquipmentDataAPI(dataEquipment);
             } catch (error) {
-                console.error("Failed to fetch API data:", error);
+                console.error("Fetch API data failed:", error);
             }
         };
         getAPI();
@@ -75,9 +37,45 @@ export default function App({ Component, pageProps }: AppProps) {
     return (
         <>
             <Header />
-            <contextAPI.Provider value={{ studentDataAPI, studentDefaultDataAPI, localizationAPI, equipmentDataAPI, voiceDataAPI, setStudentDataAPI, setEquipmentDataAPI }}>
+            <contextAPI.Provider value={{ studentDataAPI, studentDefaultDataAPI, localizationAPI, equipmentDataAPI, voiceDataAPI, setStudentDataAPI }}>
                 <Component {...pageProps} />
             </contextAPI.Provider>
         </>
     );
+}
+
+export const contextAPI = createContext<ContextType>({
+    localizationAPI: null,
+    studentDataAPI: null,
+    setStudentDataAPI: () => {},
+    studentDefaultDataAPI: null,
+    voiceDataAPI: null,
+    equipmentDataAPI: null,
+});
+
+interface LocalizationAPI {
+    BuffName: Record<string, string>;
+    ui: Record<string, string>;
+    Club: Record<string, string>;
+    SchoolLong: Record<string, string>;
+}
+
+interface ContextType {
+    localizationAPI: LocalizationAPI | null;
+    studentDataAPI: VariableType[] | null;
+    setStudentDataAPI: Dispatch<SetStateAction<VariableType[] | null>>;
+    studentDefaultDataAPI: VariableType[] | null;
+    voiceDataAPI: VariableType[] | null;
+    equipmentDataAPI: VariableType[] | null;
+}
+
+interface VariableType {
+    ArmorType: string;
+    CollectionBG: string;
+    Equipment: string;
+    Id: number;
+    Name: string;
+    School: string;
+    Category: string;
+    Tier: number;
 }

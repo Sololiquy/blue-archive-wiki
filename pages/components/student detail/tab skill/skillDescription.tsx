@@ -1,14 +1,11 @@
-import React, { ChangeEvent, FC, useContext, useState } from "react";
+import React, { ChangeEvent, useContext, useState } from "react";
 import Skill from "./skill";
+
 import styles from "@/styles/student detail/tabSkill.module.css";
 
 import { contextDetailStudent } from "../../../studentDetail";
 
-interface StatSkillProps {
-    onTierWeaponChange: (index: number) => void;
-}
-
-const SkillDescription: FC<StatSkillProps> = ({ onTierWeaponChange }) => {
+export default function SkillDescription({ onTierWeaponChange }: PropType) {
     const { studentData, tierWeapon } = useContext(contextDetailStudent);
     const [exSkillLevel, setExSkillLevel] = useState(1);
     const [skillLevel, setSkillLevel] = useState(1);
@@ -43,13 +40,13 @@ const SkillDescription: FC<StatSkillProps> = ({ onTierWeaponChange }) => {
                 <img className={styles.weaponIMG} src={studentWeaponURL} alt="" />
                 <div className={styles.levelWeaponContainer}>
                     <div className={`${styles.tierWeaponContainer} ${tierWeapon >= 1 ? styles.tierWeaponContainerActived : ""}`} onClick={() => onTierWeaponChange(1)}>
-                        T1
+                        UE1
                     </div>
                     <div className={`${styles.tierWeaponContainer} ${tierWeapon >= 2 ? styles.tierWeaponContainerActived : ""}`} onClick={() => onTierWeaponChange(2)}>
-                        T2
+                        UE2
                     </div>
                     <div className={`${styles.tierWeaponContainer} ${tierWeapon >= 3 ? styles.tierWeaponContainerActived : ""}`} onClick={() => onTierWeaponChange(3)}>
-                        T3
+                        UE3
                     </div>
                 </div>
             </div>
@@ -65,6 +62,8 @@ const SkillDescription: FC<StatSkillProps> = ({ onTierWeaponChange }) => {
             </div>
         </>
     );
-};
+}
 
-export default SkillDescription;
+interface PropType {
+    onTierWeaponChange: (index: number) => void;
+}

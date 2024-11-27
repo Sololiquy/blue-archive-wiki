@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { contextAPI } from "../../_app";
 import styles from "@/styles/student list/component.module.css";
 
-const ButtonSearch = () => {
+export default function ButtonSearch() {
     const { studentDefaultDataAPI, setStudentDataAPI } = useContext(contextAPI);
 
     const search = () => {
@@ -21,6 +21,4 @@ const ButtonSearch = () => {
             Search
         </button>
     );
-};
-
-export default ButtonSearch;
+}

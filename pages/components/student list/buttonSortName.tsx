@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { contextAPI } from "../../_app";
 import styles from "@/styles/student list/component.module.css";
 
-const ButtonSortName = () => {
+export default function ButtonSortName() {
     const { studentDataAPI, setStudentDataAPI } = useContext(contextAPI);
     const [ascSort, setAscSort] = useState(true);
 
@@ -25,6 +25,4 @@ const ButtonSortName = () => {
             Name
         </button>
     );
-};
-
-export default ButtonSortName;
+}

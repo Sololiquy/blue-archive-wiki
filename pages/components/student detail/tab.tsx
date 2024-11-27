@@ -1,14 +1,12 @@
-import React, { FC } from "react";
-
 import styles from "@/styles/student detail/tab.module.css";
 
-interface TabProps {
+interface ProbType {
     onClick: () => void;
     active: boolean;
     label: string;
 }
 
-const Tab: FC<TabProps> = ({ onClick, active, label }) => {
+export default function Tab({ onClick, active, label }: ProbType) {
     return (
         <div className={styles.container}>
             <div className={`${styles.circleContainer} ${active ? styles.active : ""}`} onClick={onClick}>
@@ -16,6 +14,4 @@ const Tab: FC<TabProps> = ({ onClick, active, label }) => {
             </div>
         </div>
     );
-};
-
-export default Tab;
+}

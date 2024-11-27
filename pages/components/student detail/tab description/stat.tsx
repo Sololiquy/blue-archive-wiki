@@ -4,15 +4,7 @@ import { contextDetailStudent } from "../../../studentDetail";
 
 import styles from "@/styles/student detail/tabDescription.module.css";
 
-interface VariableType {
-    typeStat: string;
-    nameStat: string;
-    Level: number;
-    levelWeapon: number;
-    equipment: (unknown | null)[];
-}
-
-const Stat = ({ typeStat, nameStat, Level, levelWeapon, equipment }: VariableType) => {
+export default function Stat({ typeStat, nameStat, Level, levelWeapon, equipment }: PropType) {
     const { studentData } = useContext(contextDetailStudent);
 
     // STUDENT VALUE CALCULATION
@@ -86,6 +78,12 @@ const Stat = ({ typeStat, nameStat, Level, levelWeapon, equipment }: VariableTyp
             <span className={styles.value}>{Math.round(value + equipmentBonus + weaponValue)}</span>
         </div>
     );
-};
+}
 
-export default Stat;
+interface PropType {
+    typeStat: string;
+    nameStat: string;
+    Level: number;
+    levelWeapon: number;
+    equipment: (unknown | null)[];
+}

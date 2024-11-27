@@ -1,19 +1,15 @@
-import styles from "@/styles/student detail/tabDescription.module.css";
+import React, { ChangeEvent, useContext, useEffect, useState } from "react";
 import Stat from "./stat";
 import Terrain from "./terrain";
 import Equipment from "./equipment";
 import EquipmentGear from "./equipmentGear";
 
+import styles from "@/styles/student detail/tabDescription.module.css";
+
 import { contextDetailStudent } from "../../../studentDetail";
 import { contextAPI } from "../../../_app";
 
-import React, { ChangeEvent, FC, useContext, useEffect, useState } from "react";
-
-interface StatDescriptionProps {
-    onTierWeaponChange: (index: number) => void;
-}
-
-const StatDescription: FC<StatDescriptionProps> = ({ onTierWeaponChange }) => {
+export default function StatDescription({ onTierWeaponChange }: ProbType) {
     const { studentData, tierWeapon } = useContext(contextDetailStudent);
 
     const { equipmentDataAPI } = useContext(contextAPI);
@@ -85,16 +81,16 @@ const StatDescription: FC<StatDescriptionProps> = ({ onTierWeaponChange }) => {
                 <img className={styles.weaponIMG} src={studentWeaponURL} alt="" />
                 <div className={styles.levelWeaponContainer}>
                     <div className={`${styles.tierWeaponContainer} ${tierWeapon >= 1 ? styles.tierWeaponContainerActived : ""}`} onClick={() => onTierWeaponChange(1)}>
-                        T1
+                        UE1
                     </div>
                     <div className={`${styles.tierWeaponContainer} ${tierWeapon >= 2 ? styles.tierWeaponContainerActived : ""}`} onClick={() => onTierWeaponChange(2)}>
-                        T2
+                        UE2
                     </div>
                     <div className={`${styles.tierWeaponContainer} ${tierWeapon >= 3 ? styles.tierWeaponContainerActived : ""}`} onClick={() => onTierWeaponChange(3)}>
-                        T3
+                        UE3
                     </div>
-                    <input type="range" value={levelWeapon} min="1" max="50" onChange={handleLevelWeaponChange} />
-                    {levelWeapon}
+                    <input className={styles.sliderLevelWeapon} type="range" value={levelWeapon} min="1" max="50" onChange={handleLevelWeaponChange} />
+                    <div className={styles.infolevelWeapon}>{levelWeapon}</div>
                 </div>
             </div>
             <div className={styles.container3}>
@@ -119,6 +115,7 @@ const StatDescription: FC<StatDescriptionProps> = ({ onTierWeaponChange }) => {
                 <Stat typeStat="CriticalPoint" nameStat="Crit Rate" equipment={equipments} Level={level} levelWeapon={levelWeapon} />
                 <Stat typeStat="CriticalDamageRate" nameStat="Crit Dmg" equipment={equipments} Level={level} levelWeapon={levelWeapon} />
                 <Stat typeStat="HealPower" nameStat="Healing" equipment={equipments} Level={level} levelWeapon={levelWeapon} />
+                <Stat typeStat="Range" nameStat="Attack Range" equipment={equipments} Level={level} levelWeapon={levelWeapon} />
             </div>
             <div className={styles.studentEquipmentContainer}>
                 <Equipment
@@ -174,6 +171,8 @@ const StatDescription: FC<StatDescriptionProps> = ({ onTierWeaponChange }) => {
             </span>
         </>
     );
-};
+}
 
-export default StatDescription;
+interface ProbType {
+    onTierWeaponChange: (index: number) => void;
+}

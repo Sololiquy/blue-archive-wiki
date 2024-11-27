@@ -1,18 +1,21 @@
 import React, { useContext } from "react";
+
 import styles from "@/styles/student detail/tabDescription.module.css";
+
 import { contextDetailStudent } from "../../../studentDetail";
 
-interface EquipmentProps {
-    typeEquipment: number;
-    levelEquipment: number;
-    setLevelEquipment: (value: number) => void;
-}
-
-const Equipment = ({ typeEquipment, levelEquipment, setLevelEquipment }: EquipmentProps) => {
+export default function Equipment({ typeEquipment, levelEquipment, setLevelEquipment }: PropType) {
     const { studentData } = useContext(contextDetailStudent);
     const equipmentURL = `https://raw.githubusercontent.com/SchaleDB/SchaleDB/refs/heads/main/images/equipment/full/equipment_icon_${studentData?.Equipment[
         typeEquipment
     ]?.toLowerCase()}_tier${levelEquipment}.webp`;
+
+    const handleEquipmentLevelDecrease = () => {
+        setLevelEquipment(levelEquipment - 1);
+    };
+    const handleEquipmentLevelIncrease = () => {
+        setLevelEquipment(levelEquipment + 1);
+    };
 
     return (
         <div className={styles.equipmentContainer}>
@@ -24,9 +27,21 @@ const Equipment = ({ typeEquipment, levelEquipment, setLevelEquipment }: Equipme
                     onError={(e) => (e.currentTarget.src = "https://raw.githubusercontent.com/SchaleDB/SchaleDB/refs/heads/main/images/gear/empty.png")}
                 />
             </div>
-            <input className={styles.equipmentLevel} style={{ color: "black" }} type="number" min="0" max="9" value={levelEquipment} onChange={(e) => setLevelEquipment(parseInt(e.target.value))} />
+            <div className={styles.equipmentLevel}>
+                <div className={styles.equipmentLevelArrowContainer} onClick={levelEquipment > 0 ? () => handleEquipmentLevelDecrease() : undefined}>
+                    <img className={styles.equipmentLevelArrowDecrease} src="/blue-archive-wiki/arrow.svg" alt="" />
+                </div>
+                <div className={styles.equipmentLevelInfo}>T{levelEquipment}</div>
+                <div className={styles.equipmentLevelArrowContainer} onClick={levelEquipment < 9 ? () => handleEquipmentLevelIncrease() : undefined}>
+                    <img className={styles.equipmentLevelArrowIncrease} src="/blue-archive-wiki/arrow.svg" alt="" />
+                </div>
+            </div>
         </div>
     );
-};
+}
 
-export default Equipment;
+interface PropType {
+    typeEquipment: number;
+    levelEquipment: number;
+    setLevelEquipment: (value: number) => void;
+}

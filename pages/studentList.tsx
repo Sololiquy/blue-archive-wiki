@@ -6,14 +6,14 @@ import styles from "@/styles/student list/studentList.module.css";
 
 import { contextAPI } from "./_app";
 
-const StudentList = () => {
+export default function StudentList() {
     const { studentDataAPI } = useContext(contextAPI);
 
     return (
         <>
             <div className={styles.filter}>
                 <ButtonSortName />
-                <input id="value" type="text" placeholder="Search" style={{ color: "blue" }} />
+                <input className="pl-1" id="value" type="text" placeholder="Search" style={{ color: "blue" }} />
                 <ButtonSearch />
             </div>
 
@@ -26,6 +26,4 @@ const StudentList = () => {
             </div>
         </>
     );
-};
-
-export default StudentList;
+}

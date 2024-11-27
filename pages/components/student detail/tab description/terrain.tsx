@@ -1,14 +1,10 @@
-import styles from "@/styles/student detail/tabDescription.module.css";
 import { useContext } from "react";
+
+import styles from "@/styles/student detail/tabDescription.module.css";
 
 import { contextDetailStudent } from "../../../studentDetail";
 
-interface VariableType {
-    terrainType: string;
-    terrainValue: number;
-}
-
-const Terrain = ({ terrainType, terrainValue }: VariableType) => {
+export default function Terrain({ terrainType, terrainValue }: VariableType) {
     const { studentData, tierWeapon } = useContext(contextDetailStudent);
     const terrainImg = `https://raw.githubusercontent.com/SchaleDB/SchaleDB/main/images/ui/Terrain_${terrainType}.png`;
 
@@ -42,6 +38,9 @@ const Terrain = ({ terrainType, terrainValue }: VariableType) => {
             </div>
         </>
     );
-};
+}
 
-export default Terrain;
+interface VariableType {
+    terrainType: string;
+    terrainValue: number;
+}
