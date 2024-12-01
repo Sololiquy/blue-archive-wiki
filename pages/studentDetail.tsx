@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useContext, createContext, useState } from "react";
+import React, { useContext, createContext, useState, ChangeEvent } from "react";
 
 import StatDescription from "./components/student detail/tab description/statDescription";
 import SkillDescription from "./components/student detail/tab skill/skillDescription";
@@ -14,11 +14,20 @@ import { contextAPI } from "./_app";
 export default function StudentDetail() {
     const { query } = useRouter();
     const ID = Number(query.id);
+
+    const { studentDefaultDataAPI, voiceDataAPI } = useContext(contextAPI);
+
+    const studentData = studentDefaultDataAPI?.find((student) => student.Id === ID) as unknown as VariableType | null;
+    const studentvoiceData = voiceDataAPI?.[ID] as unknown as StudentVoiceData | null;
+
     const [tabIndex, setTabIndex] = useState(1);
     const [tierWeapon, setTierWeapon] = useState(0);
-    const { studentDefaultDataAPI, voiceDataAPI } = useContext(contextAPI);
-    const studentData = studentDefaultDataAPI?.find((student) => student.Id === ID);
-    const studentvoiceData = voiceDataAPI ? (voiceDataAPI[ID] as unknown as StudentVoiceData | null) : null;
+    const [tierStudent, setTierStudent] = useState(1);
+    const [level, setLevel] = useState(1);
+    const [levelWeapon, setLevelWeapon] = useState(1);
+    const [levelEquipment, setLevelEquipment] = useState([1, 1, 1, 0]);
+    const [bondRank, setBondRank] = useState(1);
+    const [equipments, setEquipments] = useState<(unknown | null)[]>([null, null, null]);
 
     if (!studentData) {
         return <div>Student not found</div>;
@@ -29,6 +38,13 @@ export default function StudentDetail() {
     };
     const handleTierWeaponChange = (index: number) => {
         setTierWeapon(index);
+    };
+
+    const handleBondLevelChange = (e: ChangeEvent<HTMLInputElement>) => {
+        let x = parseInt(e.target.value);
+        if (x < 1) x = 1;
+        if (x > 50) x = 50;
+        setBondRank(x);
     };
 
     const studentSpriteURL = `https://raw.githubusercontent.com/SchaleDB/SchaleDB/main/images/student/portrait/${studentData.Id}.webp`;
@@ -53,8 +69,26 @@ export default function StudentDetail() {
 
                     <div className={styles.contentDescriptionContainerScroll}>
                         <div className={styles.contentDescriptionContainer}>
-                            <contextDetailStudent.Provider value={{ studentData: studentData as unknown as VariableType, studentvoiceData, tierWeapon }}>
-                                {tabIndex === 1 && <StatDescription onTierWeaponChange={handleTierWeaponChange} />}
+                            <contextDetailStudent.Provider
+                                value={{
+                                    studentData,
+                                    studentvoiceData,
+                                    tierWeapon,
+                                    levelEquipment,
+                                    levelWeapon,
+                                    setLevelEquipment,
+                                    setLevelWeapon,
+                                    level,
+                                    setLevel,
+                                    equipments,
+                                    setEquipments,
+                                    tierStudent,
+                                    setTierStudent,
+                                    bondRank,
+                                    setBondRank,
+                                }}
+                            >
+                                {tabIndex === 1 && <StatDescription onTierWeaponChange={handleTierWeaponChange} handleBondLevelChange={handleBondLevelChange} />}
                                 {tabIndex === 2 && <SkillDescription onTierWeaponChange={handleTierWeaponChange} />}
                                 {tabIndex === 3 && <ProfileDescription />}
                                 {tabIndex === 4 && <VoiceDescription />}
@@ -70,25 +104,49 @@ export default function StudentDetail() {
 export const contextDetailStudent = createContext<ContextType>({
     studentData: null,
     studentvoiceData: null,
+    levelEquipment: [1, 1, 1, 0],
+    setLevelEquipment: () => {},
+    levelWeapon: 1,
+    setLevelWeapon: () => {},
+    level: 1,
+    setLevel: () => {},
+    equipments: [null, null, null],
+    setEquipments: () => {},
     tierWeapon: 0,
+    tierStudent: 1,
+    setTierStudent: () => {},
+    bondRank: 1,
+    setBondRank: () => {},
 });
 
-interface VoiceData {
-    Group: string;
-    Transcription: string;
-    AudioClip: string;
+interface ContextType {
+    studentData: VariableType | null;
+    studentvoiceData: StudentVoiceData | null;
+    levelEquipment: number[];
+    setLevelEquipment: (value: number[]) => void;
+    levelWeapon: number;
+    setLevelWeapon: (value: number) => void;
+    level: number;
+    setLevel: (value: number) => void;
+    equipments: (unknown | null)[];
+    setEquipments: (value: (unknown | null)[]) => void;
+    tierWeapon: number;
+    tierStudent: number;
+    setTierStudent: (value: number) => void;
+    bondRank: number;
+    setBondRank: (value: number) => void;
 }
+
 interface StudentVoiceData {
     Battle: VoiceData[];
     Event: VoiceData[];
     Lobby: VoiceData[];
     Normal: VoiceData[];
 }
-
-interface ContextType {
-    studentData: VariableType | null;
-    studentvoiceData: StudentVoiceData | null;
-    tierWeapon: number;
+interface VoiceData {
+    Group: string;
+    Transcription: string;
+    AudioClip: string;
 }
 
 interface VariableType {
@@ -115,9 +173,14 @@ interface VariableType {
         Name: string;
         SkillType: string;
         Desc: string;
-        Cost?: number[];
+        Cost: number[];
         Parameters: string[];
     }[];
+    Gear: {
+        Released: string[];
+        StatType: string[];
+        StatValue: number[][];
+    };
     Club: string;
     School: string;
     TacticRole: string;
@@ -144,6 +207,8 @@ interface VariableType {
     Designer: string;
     Illustrator: string;
     ProfileIntroduction: string;
+    FavorStatType: string[];
+    FavorStatValue: number[][];
     Battle: string[];
     Event: string[];
     Lobby: string[];

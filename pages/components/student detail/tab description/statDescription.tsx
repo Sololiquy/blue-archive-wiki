@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useContext, useEffect, useState } from "react";
+import React, { ChangeEvent, useContext, useEffect } from "react";
 import Stat from "./stat";
 import Terrain from "./terrain";
 import Equipment from "./equipment";
@@ -9,14 +9,10 @@ import styles from "@/styles/student detail/tabDescription.module.css";
 import { contextDetailStudent } from "../../../studentDetail";
 import { contextAPI } from "../../../_app";
 
-export default function StatDescription({ onTierWeaponChange }: ProbType) {
-    const { studentData, tierWeapon } = useContext(contextDetailStudent);
-
+export default function StatDescription({ onTierWeaponChange, handleBondLevelChange }: ProbType) {
+    const { studentData, tierWeapon, equipments, setEquipments, levelEquipment, setLevelEquipment, levelWeapon, setLevelWeapon, level, setLevel, tierStudent, setTierStudent, bondRank } =
+        useContext(contextDetailStudent);
     const { equipmentDataAPI } = useContext(contextAPI);
-    const [level, setLevel] = useState(1);
-    const [levelWeapon, setLevelWeapon] = useState(1);
-    const [levelEquipment, setLevelEquipment] = useState([1, 1, 1, 0]);
-    const [equipments, setEquipments] = useState<(unknown | null)[]>([null, null, null]);
 
     useEffect(() => {
         if (studentData?.Equipment && studentData.Equipment.length > 0) {
@@ -39,6 +35,7 @@ export default function StatDescription({ onTierWeaponChange }: ProbType) {
     const roleStudentURL = `https://raw.githubusercontent.com/SchaleDB/SchaleDB/main/images/ui/Role_${studentData?.TacticRole}.png`;
     const attackTypeURL = "https://raw.githubusercontent.com/SchaleDB/SchaleDB/main/images/ui/Type_Attack.png";
     const defenseTypeURL = "https://raw.githubusercontent.com/SchaleDB/SchaleDB/main/images/ui/Type_Defense.png";
+    const studentPotraitURL = `https://raw.githubusercontent.com/SchaleDB/SchaleDB/main/images/student/collection/${studentData.Id}.webp`;
 
     const attackType = {
         Explosion: "explosiveAttackColor",
@@ -66,6 +63,10 @@ export default function StatDescription({ onTierWeaponChange }: ProbType) {
         setLevelWeapon(parseInt(e.target.value));
     };
 
+    const handleTierStudentChange = (index: number) => {
+        setTierStudent(index);
+    };
+
     return (
         <>
             <div className={styles.studentName}>{studentData?.Name}</div>
@@ -90,7 +91,7 @@ export default function StatDescription({ onTierWeaponChange }: ProbType) {
                         UE3
                     </div>
                     <input className={styles.sliderLevelWeapon} type="range" value={levelWeapon} min="1" max="50" onChange={handleLevelWeaponChange} />
-                    <div className={styles.infolevelWeapon}>{levelWeapon}</div>
+                    <div className={styles.infoLevelWeapon}>Lv.{levelWeapon}</div>
                 </div>
             </div>
             <div className={styles.container3}>
@@ -121,58 +122,108 @@ export default function StatDescription({ onTierWeaponChange }: ProbType) {
                 <Equipment
                     typeEquipment={0}
                     levelEquipment={levelEquipment[0]}
-                    setLevelEquipment={(value: number) =>
-                        setLevelEquipment((prev) => {
-                            const updated = [...prev];
-                            updated[0] = value;
-                            return updated;
-                        })
-                    }
+                    setLevelEquipment={(value: number) => {
+                        const updated = [...levelEquipment];
+                        updated[0] = value;
+                        setLevelEquipment(updated);
+                    }}
                 />
                 <Equipment
                     typeEquipment={1}
                     levelEquipment={levelEquipment[1]}
-                    setLevelEquipment={(value: number) =>
-                        setLevelEquipment((prev) => {
-                            const updated = [...prev];
-                            updated[1] = value;
-                            return updated;
-                        })
-                    }
+                    setLevelEquipment={(value: number) => {
+                        const updated = [...levelEquipment];
+                        updated[1] = value;
+                        setLevelEquipment(updated);
+                    }}
                 />
                 <Equipment
                     typeEquipment={2}
                     levelEquipment={levelEquipment[2]}
-                    setLevelEquipment={(value: number) =>
-                        setLevelEquipment((prev) => {
-                            const updated = [...prev];
-                            updated[2] = value;
-                            return updated;
-                        })
-                    }
+                    setLevelEquipment={(value: number) => {
+                        const updated = [...levelEquipment];
+                        updated[2] = value;
+                        setLevelEquipment(updated);
+                    }}
                 />
                 <div className={styles.separator}>
                     <div className={styles.separatorLine}></div>
                 </div>
                 <EquipmentGear
                     levelEquipmentGear={levelEquipment[3]}
-                    setLevelEquipmentGear={(value: number) =>
-                        setLevelEquipment((prev) => {
-                            const updated = [...prev];
-                            updated[3] = value;
-                            return updated;
-                        })
-                    }
+                    setLevelEquipmentGear={(value: number) => {
+                        const updated = [...levelEquipment];
+                        updated[3] = value;
+                        setLevelEquipment(updated);
+                    }}
                 />
             </div>
-            <span>
-                <input type="range" value={level} min="1" max="100" onChange={handleLevelChange} />
-                {level}
-            </span>
+            <div className={styles.sliderLevelContainer}>
+                <input className={styles.sliderLevel} type="range" value={level} min="1" max="100" onChange={handleLevelChange} />
+                <div className={styles.infoLevel}>Lv.{level}</div>
+            </div>
+            <div className={styles.tierStudentContainer}>
+                <div className={styles.starStudentContainer}>
+                    <img
+                        className={styles.starStudentImg}
+                        src={tierStudent >= 1 ? "/blue-archive-wiki/star-gold.svg" : "/blue-archive-wiki/star-empty.svg"}
+                        alt=""
+                        onClick={() => handleTierStudentChange(1)}
+                    />
+                    <img
+                        className={styles.starStudentImg}
+                        src={tierStudent >= 2 ? "/blue-archive-wiki/star-gold.svg" : "/blue-archive-wiki/star-empty.svg"}
+                        alt=""
+                        onClick={() => handleTierStudentChange(2)}
+                    />
+                    <img
+                        className={styles.starStudentImg}
+                        src={tierStudent >= 3 ? "/blue-archive-wiki/star-gold.svg" : "/blue-archive-wiki/star-empty.svg"}
+                        alt=""
+                        onClick={() => handleTierStudentChange(3)}
+                    />
+                    <img
+                        className={styles.starStudentImg}
+                        src={tierStudent >= 4 ? "/blue-archive-wiki/star-gold.svg" : "/blue-archive-wiki/star-empty.svg"}
+                        alt=""
+                        onClick={() => handleTierStudentChange(4)}
+                    />
+                    <img
+                        className={styles.starStudentImg}
+                        src={tierStudent >= 5 ? "/blue-archive-wiki/star-gold.svg" : "/blue-archive-wiki/star-empty.svg"}
+                        alt=""
+                        onClick={() => handleTierStudentChange(5)}
+                    />
+                    <div className="mx-1"></div>
+                    <img
+                        className={styles.starStudentImg}
+                        src={tierStudent >= 6 ? "/blue-archive-wiki/star-blue.svg" : "/blue-archive-wiki/star-empty.svg"}
+                        alt=""
+                        onClick={() => handleTierStudentChange(6)}
+                    />
+                    <img
+                        className={styles.starStudentImg}
+                        src={tierStudent >= 7 ? "/blue-archive-wiki/star-blue.svg" : "/blue-archive-wiki/star-empty.svg"}
+                        alt=""
+                        onClick={() => handleTierStudentChange(7)}
+                    />
+                    <img
+                        className={styles.starStudentImg}
+                        src={tierStudent >= 8 ? "/blue-archive-wiki/star-blue.svg" : "/blue-archive-wiki/star-empty.svg"}
+                        alt=""
+                        onClick={() => handleTierStudentChange(8)}
+                    />
+                </div>
+                <div className={styles.bondStudentContainer}>
+                    <img className={styles.bondStudentPotrait} src={studentPotraitURL} alt="" />
+                    <input className={styles.bondStudentInfo} type="number" min="1" max="50" defaultValue="1" value={bondRank} onChange={handleBondLevelChange} />
+                </div>
+            </div>
         </>
     );
 }
 
 interface ProbType {
     onTierWeaponChange: (index: number) => void;
+    handleBondLevelChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }

@@ -58,6 +58,7 @@ interface LocalizationAPI {
     ui: Record<string, string>;
     Club: Record<string, string>;
     SchoolLong: Record<string, string>;
+    VoiceClip: Record<string, string>;
 }
 
 interface ContextType {

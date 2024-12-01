@@ -3,12 +3,7 @@ import styles from "@/styles/student detail/tabSkill.module.css";
 import { contextDetailStudent } from "../../../studentDetail";
 import { contextAPI } from "../../../_app";
 
-interface VariableType {
-    type: string;
-    level: number;
-}
-
-const Skill = ({ type, level }: VariableType) => {
+export default function Skill({ type, level }: VariableType) {
     const { studentData } = useContext(contextDetailStudent);
     const { localizationAPI } = useContext(contextAPI);
     const skillType = localizationAPI?.ui[`student_skill_${type}` as keyof typeof localizationAPI.ui];
@@ -59,17 +54,18 @@ const Skill = ({ type, level }: VariableType) => {
                 </div>
                 <div>
                     <div className={styles.skillInfoName}>{Skill?.Name}</div>
-                    <div className={styles.skillInfoType}>{type === "ex" ? "Ex Skill" : skillType}</div>
+                    <div className={styles.skillInfoStat}>
+                        {type === "ex" && <div className={styles.skillInfoStatCost}>{`${Skill?.Cost?.[level - 1] || "N/A"} COST`}</div>}
+                        <div className={styles.skillInfoType}>{type === "ex" ? "Ex Skill" : skillType}</div>
+                    </div>
                 </div>
             </div>
             <div className={styles.skillInfoDescription} dangerouslySetInnerHTML={{ __html: description ?? "" }}></div>
-            {type === "ex" && (
-                <div className={styles.skillInfoStat}>
-                    <div className={styles.skillInfoStatCost}>{`${Skill?.Cost?.[level - 1] || "N/A"} COST`}</div>
-                </div>
-            )}
         </div>
     );
-};
+}
 
-export default Skill;
+interface VariableType {
+    type: string;
+    level: number;
+}

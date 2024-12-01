@@ -58,16 +58,29 @@
 .skillInfoName {
     @apply font-bold text-xl tracking-normal;
 }
+.skillInfoStat {
+    @apply my-1 flex flex-row;
+}
 .skillInfoType {
     @apply italic text-base tracking-wide;
+}
+.skillInfoStatCost {
+    @apply mr-2 w-20 rounded-full font-bold italic text-base text-center;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 .skillInfoDescription {
     @apply pl-2 pr-4 text-base text-justify;
 }
-.skillInfoStat {
-    @apply px-2 mb-1 flex flex-row;
+
+.levelExSkillContainer,
+.levelSkillContainer {
+    @apply w-full p-1 flex flex-row;
 }
-.skillInfoStatCost {
-    @apply w-20 rounded-full font-bold italic text-base text-center;
-    background-color: rgba(0, 0, 0, 0.5);
+.sliderLevelExSkill,
+.sliderLevelSkill {
+    @apply mr-1 w-full;
+}
+.LevelExSkillInfo,
+.LevelSkillInfo {
+    @apply w-11 font-bold italic tracking-wide shrink-0 flex justify-center;
 }

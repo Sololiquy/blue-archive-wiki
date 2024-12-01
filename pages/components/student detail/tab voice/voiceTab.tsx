@@ -1,14 +1,6 @@
-import React, { FC } from "react";
-
 import styles from "@/styles/student detail/tab.module.css";
 
-interface TabProps {
-    onClick: () => void;
-    active: boolean;
-    label: string;
-}
-
-const VoiceTab: FC<TabProps> = ({ onClick, active, label }) => {
+export default function VoiceTab({ onClick, active, label }: TabProps) {
     return (
         <>
             <div className={`${styles.tabVoice} ${active ? styles.tabVoiceActive : ""}`} onClick={onClick}>
@@ -16,6 +8,10 @@ const VoiceTab: FC<TabProps> = ({ onClick, active, label }) => {
             </div>
         </>
     );
-};
+}
 
-export default VoiceTab;
+interface TabProps {
+    onClick: () => void;
+    active: boolean;
+    label: string;
+}

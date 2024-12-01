@@ -6,12 +6,13 @@ import styles from "@/styles/student detail/tabSkill.module.css";
 import { contextDetailStudent } from "../../../studentDetail";
 
 export default function SkillDescription({ onTierWeaponChange }: PropType) {
-    const { studentData, tierWeapon } = useContext(contextDetailStudent);
+    const { studentData, tierWeapon, levelEquipment } = useContext(contextDetailStudent);
     const [exSkillLevel, setExSkillLevel] = useState(1);
     const [skillLevel, setSkillLevel] = useState(1);
     const studentWeaponURL = `https://raw.githubusercontent.com/SchaleDB/SchaleDB/main/images/weapon/${studentData?.WeaponImg}.webp`;
 
-    const passive = tierWeapon >= 2 ? "weaponpassive" : "passive";
+    const passiveSkill = tierWeapon >= 2 ? "weaponpassive" : "passive";
+    const basicSkill = studentData?.Gear?.Released && levelEquipment[3] >= 1 ? "gearnormal" : "normal";
 
     const squadType = {
         Main: ["strikerRoleColor", "STRIKER"],
@@ -52,13 +53,17 @@ export default function SkillDescription({ onTierWeaponChange }: PropType) {
             </div>
             <div className={styles.skillContainer}>
                 <Skill type="ex" level={exSkillLevel} />
-                <input type="range" value={exSkillLevel} min="1" max="5" onChange={handleExSkillLevelChange} />
-                <span>{exSkillLevel}</span>
-                <Skill type="normal" level={skillLevel} />
-                <Skill type={passive} level={skillLevel} />
+                <div className={styles.levelExSkillContainer}>
+                    <input className={styles.sliderLevelExSkill} type="range" value={exSkillLevel} min="1" max="5" onChange={handleExSkillLevelChange} />
+                    <div className={styles.LevelExSkillInfo}>Lv.{exSkillLevel}</div>
+                </div>
+                <Skill type={basicSkill} level={skillLevel} />
+                <Skill type={passiveSkill} level={skillLevel} />
                 <Skill type="sub" level={skillLevel} />
-                <input type="range" value={skillLevel} min="1" max="10" onChange={handleSkillLevelChange} />
-                <span>{skillLevel}</span>
+                <div className={styles.levelSkillContainer}>
+                    <input className={styles.sliderLevelSkill} type="range" value={skillLevel} min="1" max="10" onChange={handleSkillLevelChange} />
+                    <div className={styles.LevelSkillInfo}>Lv.{skillLevel}</div>
+                </div>
             </div>
         </>
     );

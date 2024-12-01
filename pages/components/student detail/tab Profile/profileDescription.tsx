@@ -4,7 +4,7 @@ import styles from "@/styles/student detail/tabProfile.module.css";
 import { contextDetailStudent } from "../../../studentDetail";
 import { contextAPI } from "../../../_app";
 
-const ProfileDescription = () => {
+export default function ProfileDescription() {
     const { studentData } = useContext(contextDetailStudent);
     const { localizationAPI } = useContext(contextAPI);
     const school = localizationAPI?.SchoolLong[studentData?.School as keyof typeof localizationAPI.SchoolLong];
@@ -73,6 +73,4 @@ const ProfileDescription = () => {
             <div className={styles.introductionContainer}>{studentData?.ProfileIntroduction}</div>
         </>
     );
-};
-
-export default ProfileDescription;
+}

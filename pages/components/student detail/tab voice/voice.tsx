@@ -1,18 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "@/styles/student detail/tabVoiceDescription.module.css";
 
-interface variableType {
-    voice?: {
-        Group: string;
-        Transcription: string;
-        AudioClip: string;
-    };
-}
+import { contextAPI } from "../../../_app";
 
-const Voice = ({ voice }: variableType) => {
+export default function Voice({ voice }: variableType) {
+    const { localizationAPI } = useContext(contextAPI);
+
     if (!voice) return null;
+
     const voiceURL = `https://r2.schaledb.com/voice/${voice.AudioClip}`;
-    console.log(voice);
+
+    let voiceTitle = "";
+    const [x, y] = (voice?.Group.match(/^(\D+)(\d*)$/) || ["", "", ""]).slice(1);
+    if (y === "") {
+        voiceTitle = localizationAPI?.VoiceClip[x as keyof typeof localizationAPI.VoiceClip]?.replace("{0}", y) ?? "";
+    } else {
+        voiceTitle = localizationAPI?.VoiceClip[x as keyof typeof localizationAPI.VoiceClip]?.replace("{0}", y) ?? "";
+    }
+
     return (
         <>
             <div className={styles.voiceContainer}>
@@ -20,12 +25,18 @@ const Voice = ({ voice }: variableType) => {
                     <audio controls className="h-8 w-48">
                         <source src={voiceURL} type="audio/mp3" />
                     </audio>
-                    <div className={styles.voiceTitle}>{voice?.Group}</div>
+                    <div className={styles.voiceTitle}>{voiceTitle}</div>
                 </div>
                 <div className={styles.voiceDescription}>{voice?.Transcription}</div>
             </div>
         </>
     );
-};
+}
 
-export default Voice;
+interface variableType {
+    voice: {
+        Group: string;
+        Transcription: string;
+        AudioClip: string;
+    };
+}

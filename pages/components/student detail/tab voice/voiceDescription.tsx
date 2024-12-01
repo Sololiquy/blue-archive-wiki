@@ -4,7 +4,7 @@ import VoiceTab from "./voiceTab";
 import styles from "@/styles/student detail/tabVoiceDescription.module.css";
 import { contextDetailStudent } from "../../../studentDetail";
 
-const VoiceDescription = () => {
+export default function VoiceDescription() {
     const { studentvoiceData } = useContext(contextDetailStudent);
     const [voicetabIndex, setvoicetabIndex] = useState(1);
 
@@ -35,6 +35,4 @@ const VoiceDescription = () => {
             </div>
         </>
     );
-};
-
-export default VoiceDescription;
+}
