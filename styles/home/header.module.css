@@ -9,7 +9,8 @@
 }
 
 .Home,
-.studentList {
+.studentList,
+.enemyList {
     @apply mr-7 text-lg font-semibold italic;
 
     color: #f0f8ff;

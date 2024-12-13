@@ -1,0 +1,12 @@
+.containerCard {
+    @apply w-[300px] h-[80px] shrink-0 relative overflow-hidden flex;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.enemyImg {
+    @apply h-full -right-10 absolute object-cover;
+}
+
+.enemyBGImg {
+    @apply h-full left-0 absolute object-cover;
+}

@@ -7,6 +7,7 @@ export default function App({ Component, pageProps }: AppProps) {
     const [localizationAPI, setLocalizationAPI] = useState<LocalizationAPI | null>(null);
     const [studentDataAPI, setStudentDataAPI] = useState<VariableType[] | null>(null);
     const [studentDefaultDataAPI, setStudentDefaultDataAPI] = useState<VariableType[] | null>(null);
+    const [enemyAPI, setEnemyAPI] = useState<EnemyAPIType[] | null>(null);
     const [voiceDataAPI, setVoiceDataAPI] = useState<VariableType[] | null>(null);
     const [equipmentDataAPI, setEquipmentDataAPI] = useState<VariableType[] | null>(null);
 
@@ -14,16 +15,19 @@ export default function App({ Component, pageProps }: AppProps) {
         const getAPI = async () => {
             try {
                 const student = await fetch("https://raw.githubusercontent.com/SchaleDB/SchaleDB/main/data/en/students.json");
+                const enemy = await fetch("https://raw.githubusercontent.com/SchaleDB/SchaleDB/main/data/en/raids.json");
                 const voice = await fetch("https://raw.githubusercontent.com/SchaleDB/SchaleDB/refs/heads/main/data/en/voice.json");
                 const equipment = await fetch("https://raw.githubusercontent.com/SchaleDB/SchaleDB/refs/heads/main/data/en/equipment.json");
                 const localization = await fetch("https://raw.githubusercontent.com/SchaleDB/SchaleDB/refs/heads/main/data/en/localization.json");
 
                 const dataLocalization: LocalizationAPI = await localization.json();
                 const dataStudent: VariableType[] = await student.json();
+                const dataEnemy: EnemyAPIType[] = await enemy.json();
                 const dataVoice: VariableType[] = await voice.json();
                 const dataEquipment: VariableType[] = await equipment.json();
                 setStudentDataAPI(dataStudent.sort((a, b) => a.Name.localeCompare(b.Name)));
                 setStudentDefaultDataAPI(dataStudent.sort((a, b) => a.Name.localeCompare(b.Name)));
+                setEnemyAPI(dataEnemy);
                 setLocalizationAPI(dataLocalization);
                 setVoiceDataAPI(dataVoice);
                 setEquipmentDataAPI(dataEquipment);
@@ -37,7 +41,7 @@ export default function App({ Component, pageProps }: AppProps) {
     return (
         <>
             <Header />
-            <contextAPI.Provider value={{ studentDataAPI, studentDefaultDataAPI, localizationAPI, equipmentDataAPI, voiceDataAPI, setStudentDataAPI }}>
+            <contextAPI.Provider value={{ studentDataAPI, studentDefaultDataAPI, enemyAPI, localizationAPI, equipmentDataAPI, voiceDataAPI, setStudentDataAPI }}>
                 <Component {...pageProps} />
             </contextAPI.Provider>
         </>
@@ -51,6 +55,7 @@ export const contextAPI = createContext<ContextType>({
     studentDefaultDataAPI: null,
     voiceDataAPI: null,
     equipmentDataAPI: null,
+    enemyAPI: null,
 });
 
 interface LocalizationAPI {
@@ -61,6 +66,10 @@ interface LocalizationAPI {
     VoiceClip: Record<string, string>;
 }
 
+interface EnemyAPIType {
+    Raid: string[];
+}
+
 interface ContextType {
     localizationAPI: LocalizationAPI | null;
     studentDataAPI: VariableType[] | null;
@@ -68,6 +77,7 @@ interface ContextType {
     studentDefaultDataAPI: VariableType[] | null;
     voiceDataAPI: VariableType[] | null;
     equipmentDataAPI: VariableType[] | null;
+    enemyAPI: EnemyAPIType[] | null;
 }
 
 interface VariableType {

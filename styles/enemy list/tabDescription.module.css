@@ -1,0 +1,9 @@
+.difficultyContainer {
+    @apply p-1 text-nowrap relative;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+.difficultyContainerActived {
+    @apply font-bold;
+    background-color: white;
+    color: black;
+}

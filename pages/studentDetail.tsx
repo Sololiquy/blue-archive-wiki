@@ -16,7 +16,6 @@ export default function StudentDetail() {
     const ID = Number(query.id);
 
     const { studentDefaultDataAPI, voiceDataAPI } = useContext(contextAPI);
-
     const studentData = studentDefaultDataAPI?.find((student) => student.Id === ID) as unknown as VariableType | null;
     const studentvoiceData = voiceDataAPI?.[ID] as unknown as StudentVoiceData | null;
 
