@@ -11,13 +11,12 @@ export default function StudentList() {
 
     return (
         <>
-            <div className={styles.filter}>
-                <ButtonSortName />
-                <input className="pl-1" id="value" type="text" placeholder="Search" style={{ color: "blue" }} />
-                <ButtonSearch />
-            </div>
-
             <div className={styles.containerScroll}>
+                <div className={styles.filter}>
+                    <ButtonSortName />
+                    <input className="pl-1" id="value" type="text" placeholder="Search" style={{ color: "blue" }} />
+                    <ButtonSearch />
+                </div>
                 <div className={styles.container}>
                     {studentDataAPI?.map((student) => (
                         <CardList key={student.Id} ID={student.Id} name={student.Name} school={student.School} />

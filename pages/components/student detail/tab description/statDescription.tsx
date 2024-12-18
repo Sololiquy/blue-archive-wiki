@@ -103,7 +103,7 @@ export default function StatDescription({ onTierWeaponChange, handleBondLevelCha
                 </div>
                 <div className={`${styles.roundedContainer} ${defenseType}`}>
                     <img className={styles.defenseTypeImg} src={defenseTypeURL} alt="" />
-                </div>{" "}
+                </div>
                 <Terrain terrainType="Street" terrainValue={Number(studentData?.StreetBattleAdaptation) ?? 0} />
                 <Terrain terrainType="Outdoor" terrainValue={Number(studentData?.OutdoorBattleAdaptation) ?? 0} />
                 <Terrain terrainType="Indoor" terrainValue={Number(studentData?.IndoorBattleAdaptation) ?? 0} />

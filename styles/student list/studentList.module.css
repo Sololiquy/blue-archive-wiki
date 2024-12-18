@@ -1,14 +1,32 @@
-.container {
-    @apply mt-9 w-full flex flex-row flex-wrap place-content-start justify-center;
+.containerScroll {
+    @apply w-screen h-[calc(100vh-2.5rem)] flex flex-col absolute top-10 pt-5 z-0 overflow-scroll overflow-x-hidden;
+}
+.containerScroll::-webkit-scrollbar {
+    width: 5px;
+}
+.containerScroll::-webkit-scrollbar-thumb {
+    @apply rounded-full;
+    background-color: #ffffff;
+}
+.containerScroll::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
 }
 
-.containerScroll {
-    @apply flex w-dvw h-[calc(100vh-2.5rem)] top-10 pt-5 absolute z-0 overflow-scroll overflow-x-hidden;
+.container {
+    @apply p-11 w-full relative flex flex-row flex-wrap gap-1 justify-center;
 }
 
 .filter {
-    @apply h-12 top-14 left-14 flex flex-row sticky rounded-full backdrop-blur-lg items-center justify-center z-50;
-
-    width: 500px;
+    @apply h-12 w-[500px] top-11 left-14 flex flex-row fixed rounded-full backdrop-blur-lg items-center justify-center z-50;
     background-color: rgba(0, 0, 0, 0.608);
+}
+
+@media (max-width: 768px) {
+    .filter {
+        @apply w-full top-0 left-auto rounded-none;
+    }
+
+    .containerScroll {
+        @apply h-screen -top-[25px] pt-9;
+    }
 }

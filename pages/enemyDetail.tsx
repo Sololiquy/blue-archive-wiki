@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import Card from "./components/enemyDetail/card";
 import Banner from "./components/enemyDetail/banner";
+import Skill from "./components/enemyDetail/skill";
 import TabDescription from "./components/enemyDetail/tabDescription";
 import styles from "@/styles/enemy list/enemyDetail.module.css";
 import { contextAPI } from "./_app";
@@ -11,7 +12,7 @@ export default function EnemyDetail() {
     const [enemy, setEnemy] = useState<[number, string]>([0, "Raid"]);
     const [enemyDifficulty, setEnemyDifficulty] = useState<number>(0);
 
-    const enemyName = enemyAPI?.[enemy[1] as keyof EnemyAPI]?.[enemy[0]]?.Name;
+    const enemySelected = enemyAPI?.[enemy[1] as keyof EnemyAPI]?.[enemy[0]];
 
     const handleEnemy = (index: number, name: string) => {
         setEnemy([index, name]);
@@ -31,7 +32,7 @@ export default function EnemyDetail() {
                     </div>
                 </div>
                 <div className={styles.enemyDetailContainer}>
-                    <div className={styles.enemyHeader}>{enemyName}</div>
+                    <div className={styles.enemyHeader}>{enemySelected?.Name}</div>
                     <div className={styles.enemyBanner}>
                         <Banner enemyID={enemy} enemyDifficulty={enemyDifficulty} />
                     </div>
@@ -44,7 +45,13 @@ export default function EnemyDetail() {
                         <TabDescription difficulty="INSANE" setEnemyDifficulty={setEnemyDifficulty} active={enemyDifficulty === 5} />
                         <TabDescription difficulty="TORMENT" setEnemyDifficulty={setEnemyDifficulty} active={enemyDifficulty === 6} />
                     </div>
-                    <div className={styles.enemyDetail}></div>
+                    <div className={styles.enemyDetail}>
+                        <div className={styles.statDetail}>
+                            {enemySelected?.RaidSkill?.map((skill) => (
+                                <Skill key={skill} data={skill} />
+                            ))}
+                        </div>
+                    </div>
                 </div>
             </div>
         </>
@@ -55,6 +62,8 @@ interface Enemy {
     Id: number;
     PathName: string;
     Name?: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    RaidSkill?: any[];
 }
 
 interface EnemyAPI {

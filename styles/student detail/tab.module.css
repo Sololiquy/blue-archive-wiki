@@ -1,5 +1,5 @@
 .container {
-    @apply flex my-1;
+    @apply flex;
 }
 .circleContainer {
     @apply w-20 h-20 rounded-l-full flex items-center justify-center;
@@ -26,4 +26,13 @@
     @apply font-bold;
     background-color: white;
     color: black;
+}
+
+@media (max-width: 1090px) {
+    .circleContainer {
+        @apply w-20 h-auto p-2 rounded-l-none rounded-t-[20px];
+    }
+    .circleCenter {
+        @apply h-auto rounded-full;
+    }
 }

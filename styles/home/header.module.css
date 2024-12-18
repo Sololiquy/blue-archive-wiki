@@ -4,6 +4,12 @@
     background-color: rgba(0, 0, 0, 0.626);
 }
 
+@media (max-width: 768px) {
+    .headerContainer {
+        @apply relative top-auto hidden;
+    }
+}
+
 .logoIMG {
     @apply h-10 flex mr-5;
 }

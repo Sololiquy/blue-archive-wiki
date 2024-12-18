@@ -1,6 +1,6 @@
 .background {
     @apply fixed inset-0 w-full h-full z-[-1];
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(38, 47, 67);
 }
 
 .contentContainer {
@@ -27,17 +27,17 @@
 }
 
 .enemyHeader {
-    @apply w-full relative;
+    @apply w-full relative font-bold text-2xl italic;
     background-color: rgba(0, 0, 0, 0.3);
 }
 
 .enemyBanner {
-    @apply w-full h-[130px] relative overflow-hidden flex;
+    @apply w-full h-[130px] shrink-0 relative overflow-hidden flex;
     background-color: rgba(0, 0, 0, 0.3);
 }
 
 .difficultyTab {
-    @apply w-full flex gap-1 px-1 flex-row overflow-x-scroll;
+    @apply w-full shrink-0 flex gap-1 px-1 flex-row overflow-x-scroll;
     background-color: rgba(0, 0, 0, 0.3);
 }
 .difficultyTab::-webkit-scrollbar {
@@ -49,4 +49,23 @@
 }
 .difficultyTab::-webkit-scrollbar-thumb:hover {
     background-color: #555;
+}
+
+.enemyDetail {
+    @apply w-[calc(100%+5px)] relative overflow-y-scroll;
+}
+.enemyDetail::-webkit-scrollbar {
+    @apply w-[5px];
+}
+.enemyDetail::-webkit-scrollbar-thumb {
+    @apply rounded-full;
+    background-color: #ffffff;
+}
+.enemyDetail::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
+.statDetail {
+    @apply w-full flex flex-col;
+    background-color: rgba(0, 0, 0, 0.3);
 }

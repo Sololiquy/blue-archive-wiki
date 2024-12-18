@@ -51,7 +51,7 @@
 }
 
 .container3 {
-    @apply mt-1 w-full flex flex-row;
+    @apply mt-1 w-full flex flex-row justify-center;
     background-color: rgba(0, 0, 0, 0.3);
 }
 
@@ -164,4 +164,7 @@
 }
 .equipmentLevelArrowIncrease {
     @apply object-contain;
+}
+
+@media (max-width: 768px) {
 }
