@@ -34,11 +34,11 @@
 
 @media (max-width: 768px) {
     .card {
-        @apply w-28;
+        @apply w-20;
     }
 
     .studentPotrait {
-        @apply size-24 rounded-full object-cover;
+        @apply size-16 rounded-full object-cover;
     }
 
     .studentSchool {
@@ -46,6 +46,6 @@
     }
 
     .studentName {
-        @apply text-xs;
+        @apply text-[12px]/[14px];
     }
 }

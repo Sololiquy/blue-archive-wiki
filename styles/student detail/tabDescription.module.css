@@ -18,11 +18,11 @@
 }
 
 .weaponContainer {
-    @apply mt-1 w-full;
+    @apply h-[150px] w-full mt-1 flex flex-col justify-center;
     background-color: rgba(0, 0, 0, 0.3);
 }
 .weaponIMG {
-    @apply py-1;
+    @apply h-[122px] object-contain;
 }
 .levelWeaponContainer {
     @apply h-7 p-1 flex flex-row items-center;

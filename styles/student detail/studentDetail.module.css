@@ -11,7 +11,7 @@
 }
 
 .characterSpriteContainer {
-    @apply h-full min-w-[500px] flex justify-center items-center;
+    @apply h-full  flex justify-center items-center;
 
     background-color: rgba(0, 0, 0, 0);
 }
@@ -47,7 +47,13 @@
 
 @media (max-width: 1090px) {
     .container {
-        @apply w-screen h-auto gap-0 flex-col;
+        @apply h-auto gap-0 flex-col;
+    }
+
+    .characterSpriteContainer {
+        @apply w-screen;
+
+        background-color: rgba(0, 0, 0, 0);
     }
 
     .descriptionContainer {

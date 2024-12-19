@@ -1,13 +1,7 @@
 .headerContainer {
-    @apply h-10 w-dvw pl-5 backdrop-blur-md flex flex-row items-center sticky top-0 z-50;
+    @apply h-10 w-dvw pl-5 backdrop-blur-md flex flex-row items-center relative top-0 z-50;
 
     background-color: rgba(0, 0, 0, 0.626);
-}
-
-@media (max-width: 768px) {
-    .headerContainer {
-        @apply relative top-auto hidden;
-    }
 }
 
 .logoIMG {
@@ -26,4 +20,10 @@
     @apply mr-4;
 
     color: #f0f8ff;
+}
+
+@media (max-width: 768px) {
+    .headerContainer {
+        @apply relative top-auto;
+    }
 }

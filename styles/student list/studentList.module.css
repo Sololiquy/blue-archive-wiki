@@ -13,7 +13,7 @@
 }
 
 .container {
-    @apply p-11 w-full relative flex flex-row flex-wrap gap-1 justify-center;
+    @apply pt-11 w-full relative flex flex-row flex-wrap gap-1 justify-center;
 }
 
 .filter {
