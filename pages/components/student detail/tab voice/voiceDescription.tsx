@@ -2,11 +2,11 @@ import React, { useContext, useState } from "react";
 import Voice from "./voice";
 import VoiceTab from "./voiceTab";
 import styles from "@/styles/student detail/tabVoiceDescription.module.css";
-import { contextDetailStudent } from "../../../studentDetail";
+import { contextDetailStudent } from "../../../layout/studentDetail";
 
 export default function VoiceDescription() {
-    const { studentvoiceData } = useContext(contextDetailStudent);
-    const [voicetabIndex, setvoicetabIndex] = useState(1);
+    const { studentvoiceData } = useContext(contextDetailStudent) as { studentvoiceData?: VoiceData };
+    const [voicetabIndex, setvoicetabIndex] = useState<number>(1);
 
     if (!studentvoiceData) {
         return <div>Voice data not found</div>;
@@ -26,13 +26,24 @@ export default function VoiceDescription() {
             </div>
 
             <div>
-                <div>
-                    {voicetabIndex === 1 && studentvoiceData?.Battle?.length > 0 ? studentvoiceData.Battle.map((voice, index) => <Voice key={index} voice={voice} />) : null}
-                    {voicetabIndex === 2 && studentvoiceData?.Event?.length > 0 ? studentvoiceData.Event.map((voice, index) => <Voice key={index} voice={voice} />) : null}
-                    {voicetabIndex === 3 && studentvoiceData?.Lobby?.length > 0 ? studentvoiceData.Lobby.map((voice, index) => <Voice key={index} voice={voice} />) : null}
-                    {voicetabIndex === 4 && studentvoiceData?.Normal?.length > 0 ? studentvoiceData.Normal.map((voice, index) => <Voice key={index} voice={voice} />) : null}
-                </div>
+                {voicetabIndex === 1 && studentvoiceData.Battle?.map((voice, index) => <Voice key={index} voice={voice} />)}
+                {voicetabIndex === 2 && studentvoiceData.Event?.map((voice, index) => <Voice key={index} voice={voice} />)}
+                {voicetabIndex === 3 && studentvoiceData.Lobby?.map((voice, index) => <Voice key={index} voice={voice} />)}
+                {voicetabIndex === 4 && studentvoiceData.Normal?.map((voice, index) => <Voice key={index} voice={voice} />)}
             </div>
         </>
     );
+}
+
+interface VoiceData {
+    Battle?: VoiceType[];
+    Event?: VoiceType[];
+    Lobby?: VoiceType[];
+    Normal?: VoiceType[];
+}
+
+interface VoiceType {
+    Group: string;
+    Transcription: string;
+    AudioClip: string;
 }

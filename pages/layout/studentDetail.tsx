@@ -1,23 +1,24 @@
 import { useRouter } from "next/router";
 import React, { useContext, createContext, useState, ChangeEvent } from "react";
 
-import StatDescription from "./components/student detail/tab description/statDescription";
-import SkillDescription from "./components/student detail/tab skill/skillDescription";
-import ProfileDescription from "./components/student detail/tab Profile/profileDescription";
-import VoiceDescription from "./components/student detail/tab voice/voiceDescription";
-import Tab from "./components/student detail/tab";
+import StatDescription from "../components/student detail/tab description/statDescription";
+import SkillDescription from "../components/student detail/tab skill/skillDescription";
+import ProfileDescription from "../components/student detail/tab Profile/profileDescription";
+import VoiceDescription from "../components/student detail/tab voice/voiceDescription";
+import Tab from "../components/student detail/tab";
 
 import styles from "@/styles/student detail/studentDetail.module.css";
 
-import { contextAPI } from "./_app";
+import { contextAPI } from "../_app";
 
 export default function StudentDetail() {
     const { query } = useRouter();
     const ID = Number(query.id);
 
     const { studentDefaultDataAPI, voiceDataAPI } = useContext(contextAPI);
-    const studentData = studentDefaultDataAPI?.find((student) => student.Id === ID) as unknown as VariableType | null;
-    const studentvoiceData = voiceDataAPI?.[ID] as unknown as StudentVoiceData | null;
+    const studentData = studentDefaultDataAPI?.find((student: { Id: number }) => student.Id === ID);
+    const studentvoiceData = voiceDataAPI?.[ID];
+    console.log(studentData);
 
     const [tabIndex, setTabIndex] = useState(1);
     const [tierWeapon, setTierWeapon] = useState(0);
@@ -26,7 +27,7 @@ export default function StudentDetail() {
     const [levelWeapon, setLevelWeapon] = useState(1);
     const [levelEquipment, setLevelEquipment] = useState([1, 1, 1, 0]);
     const [bondRank, setBondRank] = useState(1);
-    const [equipments, setEquipments] = useState<(unknown | null)[]>([null, null, null]);
+    const [equipments, setEquipments] = useState([null, null, null]);
 
     if (!studentData) {
         return <div>Student not found</div>;
@@ -46,8 +47,8 @@ export default function StudentDetail() {
         setBondRank(x);
     };
 
-    const studentSpriteURL = `https://raw.githubusercontent.com/SchaleDB/SchaleDB/main/images/student/portrait/${studentData.Id}.webp`;
-    const backgroundURL = `https://raw.githubusercontent.com/SchaleDB/SchaleDB/refs/heads/main/images/background/${studentData.CollectionBG}.jpg`;
+    const studentSpriteURL = `https://schaledb.com/images/student/portrait/${studentData.Id}.webp`;
+    const backgroundURL = `https://schaledb.com/images/background/${studentData.CollectionBG}.jpg`;
 
     return (
         <>
@@ -100,7 +101,7 @@ export default function StudentDetail() {
     );
 }
 
-export const contextDetailStudent = createContext<ContextType>({
+export const contextDetailStudent = createContext<any>({
     studentData: null,
     studentvoiceData: null,
     levelEquipment: [1, 1, 1, 0],
@@ -117,99 +118,3 @@ export const contextDetailStudent = createContext<ContextType>({
     bondRank: 1,
     setBondRank: () => {},
 });
-
-interface ContextType {
-    studentData: VariableType | null;
-    studentvoiceData: StudentVoiceData | null;
-    levelEquipment: number[];
-    setLevelEquipment: (value: number[]) => void;
-    levelWeapon: number;
-    setLevelWeapon: (value: number) => void;
-    level: number;
-    setLevel: (value: number) => void;
-    equipments: (unknown | null)[];
-    setEquipments: (value: (unknown | null)[]) => void;
-    tierWeapon: number;
-    tierStudent: number;
-    setTierStudent: (value: number) => void;
-    bondRank: number;
-    setBondRank: (value: number) => void;
-}
-
-interface StudentVoiceData {
-    Battle: VoiceData[];
-    Event: VoiceData[];
-    Lobby: VoiceData[];
-    Normal: VoiceData[];
-}
-interface VoiceData {
-    Group: string;
-    Transcription: string;
-    AudioClip: string;
-}
-
-interface VariableType {
-    BulletType: string;
-    ArmorType: string;
-    SquadType: string;
-    Equipment: string;
-    Id: number;
-    CollectionBG: string;
-    WeaponImg: string;
-    Weapon: {
-        Name: string;
-        MaxHP1: number;
-        MaxHP100: number;
-        AttackPower1: number;
-        AttackPower100: number;
-        HealPower1: number;
-        HealPower100: number;
-        AdaptationValue: number;
-        AdaptationType: string;
-    };
-    Skills: {
-        Icon: string;
-        Name: string;
-        SkillType: string;
-        Desc: string;
-        Cost: number[];
-        Parameters: string[];
-    }[];
-    Gear: {
-        Released: string[];
-        StatType: string[];
-        StatValue: number[][];
-    };
-    Club: string;
-    School: string;
-    TacticRole: string;
-    Name: string;
-    FamilyName: string;
-    PersonalName: string;
-    StarGrade: number;
-    StreetBattleAdaptation: string;
-    OutdoorBattleAdaptation: string;
-    IndoorBattleAdaptation: string;
-    MaxHP1: number;
-    MaxHP100: number;
-    AttackPower1: number;
-    AttackPower100: number;
-    DefensePower1: number;
-    DefensePower100: number;
-    HealPower1: number;
-    HealPower100: number;
-    Birthday: string;
-    CharacterAge: number;
-    CharHeightMetric: number;
-    Hobby: string;
-    CharacterVoice: string;
-    Designer: string;
-    Illustrator: string;
-    ProfileIntroduction: string;
-    FavorStatType: string[];
-    FavorStatValue: number[][];
-    Battle: string[];
-    Event: string[];
-    Lobby: string[];
-    Normal: string[];
-}

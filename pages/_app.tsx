@@ -1,32 +1,34 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import Header from "./components/home/header";
-import { useEffect, useState, createContext, Dispatch, SetStateAction } from "react";
+import { useEffect, useState, createContext } from "react";
 
 export default function App({ Component, pageProps }: AppProps) {
-    const [localizationAPI, setLocalizationAPI] = useState<LocalizationAPI | null>(null);
-    const [studentDataAPI, setStudentDataAPI] = useState<VariableType[] | null>(null);
-    const [studentDefaultDataAPI, setStudentDefaultDataAPI] = useState<VariableType[] | null>(null);
-    const [enemyAPI, setEnemyAPI] = useState<EnemyAPIType[] | null>(null);
-    const [voiceDataAPI, setVoiceDataAPI] = useState<VariableType[] | null>(null);
-    const [equipmentDataAPI, setEquipmentDataAPI] = useState<VariableType[] | null>(null);
+    const [localizationAPI, setLocalizationAPI] = useState<any>(null);
+    const [studentDataAPI, setStudentDataAPI] = useState<any>(null);
+    const [studentDefaultDataAPI, setStudentDefaultDataAPI] = useState<any>(null);
+    const [enemyAPI, setEnemyAPI] = useState<any>(null);
+    const [voiceDataAPI, setVoiceDataAPI] = useState<any>(null);
+    const [equipmentDataAPI, setEquipmentDataAPI] = useState<any>(null);
 
     useEffect(() => {
         const getAPI = async () => {
             try {
-                const student = await fetch("https://raw.githubusercontent.com/SchaleDB/SchaleDB/main/data/en/students.json");
-                const enemy = await fetch("https://raw.githubusercontent.com/SchaleDB/SchaleDB/main/data/en/raids.json");
-                const voice = await fetch("https://raw.githubusercontent.com/SchaleDB/SchaleDB/refs/heads/main/data/en/voice.json");
-                const equipment = await fetch("https://raw.githubusercontent.com/SchaleDB/SchaleDB/refs/heads/main/data/en/equipment.json");
-                const localization = await fetch("https://raw.githubusercontent.com/SchaleDB/SchaleDB/refs/heads/main/data/en/localization.json");
+                const student = await fetch("https://schaledb.com/data/en/students.min.json");
+                const enemy = await fetch("https://schaledb.com/data/en/raids.min.json");
+                const voice = await fetch("https://schaledb.com/data/en/voice.min.json");
+                const equipment = await fetch("https://schaledb.com/data/en/equipment.min.json");
+                const localization = await fetch("https://schaledb.com/data/en/localization.min.json");
 
-                const dataLocalization: LocalizationAPI = await localization.json();
-                const dataStudent: VariableType[] = await student.json();
-                const dataEnemy: EnemyAPIType[] = await enemy.json();
-                const dataVoice: VariableType[] = await voice.json();
-                const dataEquipment: VariableType[] = await equipment.json();
-                setStudentDataAPI(dataStudent.sort((a, b) => a.Name.localeCompare(b.Name)));
-                setStudentDefaultDataAPI(dataStudent.sort((a, b) => a.Name.localeCompare(b.Name)));
+                const dataLocalization: any = await localization.json();
+                const dataStudent: any = await student.json();
+                const dataEnemy: any = await enemy.json();
+                const dataVoice: any = await voice.json();
+                const dataEquipment: any = await equipment.json();
+                const sortedStudentArray = Object.values(dataStudent).sort((a: any, b: any) => a.Name.localeCompare(b.Name));
+
+                setStudentDataAPI(sortedStudentArray);
+                setStudentDefaultDataAPI(sortedStudentArray);
                 setEnemyAPI(dataEnemy);
                 setLocalizationAPI(dataLocalization);
                 setVoiceDataAPI(dataVoice);
@@ -37,7 +39,6 @@ export default function App({ Component, pageProps }: AppProps) {
         };
         getAPI();
     }, []);
-
     return (
         <>
             <Header />
@@ -48,7 +49,7 @@ export default function App({ Component, pageProps }: AppProps) {
     );
 }
 
-export const contextAPI = createContext<ContextType>({
+export const contextAPI = createContext<any>({
     localizationAPI: null,
     studentDataAPI: null,
     setStudentDataAPI: () => {},
@@ -57,36 +58,3 @@ export const contextAPI = createContext<ContextType>({
     equipmentDataAPI: null,
     enemyAPI: null,
 });
-
-interface LocalizationAPI {
-    BuffName: Record<string, string>;
-    ui: Record<string, string>;
-    Club: Record<string, string>;
-    SchoolLong: Record<string, string>;
-    VoiceClip: Record<string, string>;
-}
-
-interface EnemyAPIType {
-    Raid: string[];
-}
-
-interface ContextType {
-    localizationAPI: LocalizationAPI | null;
-    studentDataAPI: VariableType[] | null;
-    setStudentDataAPI: Dispatch<SetStateAction<VariableType[] | null>>;
-    studentDefaultDataAPI: VariableType[] | null;
-    voiceDataAPI: VariableType[] | null;
-    equipmentDataAPI: VariableType[] | null;
-    enemyAPI: EnemyAPIType[] | null;
-}
-
-interface VariableType {
-    ArmorType: string;
-    CollectionBG: string;
-    Equipment: string;
-    Id: number;
-    Name: string;
-    School: string;
-    Category: string;
-    Tier: number;
-}

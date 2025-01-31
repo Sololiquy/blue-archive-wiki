@@ -8,8 +8,8 @@ export default function Banner({ enemyID, enemyDifficulty }: PropType) {
 
     const enemyData = enemyAPI?.Raid ? enemyAPI.Raid[enemyID[0]] : null;
 
-    const enemyImgURL = `https://raw.githubusercontent.com/SchaleDB/SchaleDB/refs/heads/main/images/raid/Boss_Portrait_${enemyData?.PathName}_${enemyDifficulty >= 5 ? "Insane_" : ""}Lobby.png`;
-    const enemyBGImgURL = `https://raw.githubusercontent.com/SchaleDB/SchaleDB/refs/heads/main/images/raid/Boss_Portrait_${enemyData?.PathName}_LobbyBG.png`;
+    const enemyImgURL = `https://schaledb.com/refs/heads/main/images/raid/Boss_Portrait_${enemyData?.PathName}_${enemyDifficulty >= 5 ? "Insane_" : ""}Lobby.png`;
+    const enemyBGImgURL = `https://schaledb.com/refs/heads/main/images/raid/Boss_Portrait_${enemyData?.PathName}_LobbyBG.png`;
 
     return (
         <>

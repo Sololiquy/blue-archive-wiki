@@ -10,3 +10,9 @@
 .enemyBGImg {
     @apply h-full left-0 absolute object-cover;
 }
+
+@media (max-width: 880px) {
+    .containerCard {
+        @apply w-[200px];
+    }
+}

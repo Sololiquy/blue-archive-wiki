@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import styles from "@/styles/student detail/tabProfile.module.css";
 
-import { contextDetailStudent } from "../../../studentDetail";
+import { contextDetailStudent } from "../../../layout/studentDetail";
 import { contextAPI } from "../../../_app";
 
 export default function ProfileDescription() {
@@ -10,8 +10,8 @@ export default function ProfileDescription() {
     const school = localizationAPI?.SchoolLong[studentData?.School as keyof typeof localizationAPI.SchoolLong];
     const club = localizationAPI?.Club[studentData?.Club as keyof typeof localizationAPI.Club];
 
-    const studentWeaponURL = `https://raw.githubusercontent.com/SchaleDB/SchaleDB/main/images/weapon/${studentData?.WeaponImg}.webp`;
-    const studentSchoolURL = `https://raw.githubusercontent.com/SchaleDB/SchaleDB/main/images/schoolicon/School_Icon_${studentData?.School?.toUpperCase()}_W.png`;
+    const studentWeaponURL = `https://schaledb.com/images/weapon/${studentData?.WeaponImg}.webp`;
+    const studentSchoolURL = `https://schaledb.com/images/schoolicon/${studentData?.School}.png`;
 
     return (
         <>

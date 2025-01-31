@@ -1,0 +1,35 @@
+.card {
+    @apply w-36 h-auto p-2 flex flex-col items-center overflow-hidden;
+
+    border: 2px solid rgb(255, 255, 255);
+}
+
+.studentPotrait {
+    @apply size-32 rounded-full object-cover;
+}
+
+.studentSchool {
+    @apply block my-1 w-20 h-auto;
+}
+
+.studentName {
+    @apply text-center;
+}
+
+@media (max-width: 768px) {
+    .card {
+        @apply w-20;
+    }
+
+    .studentPotrait {
+        @apply size-16 rounded-full object-cover;
+    }
+
+    .studentSchool {
+        @apply hidden;
+    }
+
+    .studentName {
+        @apply text-[12px]/[14px];
+    }
+}

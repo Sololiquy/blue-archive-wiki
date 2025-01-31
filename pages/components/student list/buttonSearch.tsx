@@ -11,7 +11,7 @@ export default function ButtonSearch() {
         if (!searchValue) {
             setStudentDataAPI(studentDefaultDataAPI);
         } else if (studentDefaultDataAPI) {
-            const filteredData = studentDefaultDataAPI.filter((student) => student.Name.toLowerCase().includes(searchValue));
+            const filteredData = studentDefaultDataAPI.filter((student: { Name: string }) => student.Name.toLowerCase().includes(searchValue));
             setStudentDataAPI(filteredData);
         }
     };
