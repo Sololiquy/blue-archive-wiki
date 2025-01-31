@@ -73,7 +73,7 @@ export default function StatDescription({ onTierWeaponChange, handleBondLevelCha
             <div className={styles.role}>
                 <div className={styles.starGrade}>
                     {Array.from({ length: studentData?.StarGrade }, (_, i) => (
-                        <img className={styles.starIMG} key={i} src="/blue-archive-wiki/star.svg" alt="Star" />
+                        <img className={styles.starIMG} key={i} src="/star.svg" alt="Star" />
                     ))}
                 </div>
                 <div className={`${styles.typeSquad} ${squadType[0]}`}>{squadType[1]}</div>
