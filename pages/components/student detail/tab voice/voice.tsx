@@ -3,7 +3,7 @@ import styles from "@/styles/student detail/tabVoiceDescription.module.css";
 
 import { contextAPI } from "../../../_app";
 
-export default function Voice({ voice }: variableType) {
+export default function Voice({ voice }: parameterType) {
     const { localizationAPI } = useContext(contextAPI);
 
     if (!voice) return null;
@@ -33,7 +33,7 @@ export default function Voice({ voice }: variableType) {
     );
 }
 
-interface variableType {
+interface parameterType {
     voice: {
         Group: string;
         Transcription: string;

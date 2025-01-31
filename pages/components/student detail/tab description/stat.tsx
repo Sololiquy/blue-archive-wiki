@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 
-import { contextDetailStudent } from "../../../studentDetail";
+import { contextDetailStudent } from "../../../layout/studentDetail";
 
 import styles from "@/styles/student detail/tabDescription.module.css";
 
@@ -133,7 +133,7 @@ export default function Stat({ typeStat, nameStat, Level, levelWeapon }: PropTyp
 
     const equipmentBonus = Math.round((equipmentTotalValue + Number.EPSILON) * 10) / 10;
 
-    const statIconURL = `https://raw.githubusercontent.com/SchaleDB/SchaleDB/main/images/staticon/Stat_${typeStat}.png`;
+    const statIconURL = `https://schaledb.com/images/staticon/Stat_${typeStat}.png`;
 
     return (
         <div className={styles.statContainer}>

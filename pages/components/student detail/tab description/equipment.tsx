@@ -2,13 +2,11 @@ import React, { useContext } from "react";
 
 import styles from "@/styles/student detail/tabDescription.module.css";
 
-import { contextDetailStudent } from "../../../studentDetail";
+import { contextDetailStudent } from "../../../layout/studentDetail";
 
 export default function Equipment({ typeEquipment, levelEquipment, setLevelEquipment }: PropType) {
     const { studentData } = useContext(contextDetailStudent);
-    const equipmentURL = `https://raw.githubusercontent.com/SchaleDB/SchaleDB/refs/heads/main/images/equipment/full/equipment_icon_${studentData?.Equipment[
-        typeEquipment
-    ]?.toLowerCase()}_tier${levelEquipment}.webp`;
+    const equipmentURL = `https://schaledb.com/images/equipment/full/equipment_icon_${studentData?.Equipment[typeEquipment]?.toLowerCase()}_tier${levelEquipment}.webp`;
 
     const handleEquipmentLevelDecrease = () => {
         setLevelEquipment(levelEquipment - 1);
@@ -20,12 +18,7 @@ export default function Equipment({ typeEquipment, levelEquipment, setLevelEquip
     return (
         <div className={styles.equipmentContainer}>
             <div className={styles.containerImg}>
-                <img
-                    className={styles.equipmentImg}
-                    src={equipmentURL}
-                    alt=""
-                    onError={(e) => (e.currentTarget.src = "https://raw.githubusercontent.com/SchaleDB/SchaleDB/refs/heads/main/images/gear/empty.png")}
-                />
+                <img className={styles.equipmentImg} src={equipmentURL} alt="" onError={(e) => (e.currentTarget.src = "https://schaledb.com/images/gear/empty.png")} />
             </div>
             <div className={styles.equipmentLevel}>
                 <div className={styles.equipmentLevelArrowContainer} onClick={levelEquipment > 0 ? () => handleEquipmentLevelDecrease() : undefined}>

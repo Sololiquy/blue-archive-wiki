@@ -8,7 +8,7 @@
 }
 
 .enemyListContainer {
-    @apply w-[400px] min-h-[100px] relative flex flex-col;
+    @apply h-[calc(100%-10px)] relative flex flex-col;
     background-color: rgba(0, 0, 0, 0.3);
 }
 
@@ -37,7 +37,7 @@
 }
 
 .difficultyTab {
-    @apply w-full shrink-0 flex gap-1 px-1 flex-row overflow-x-scroll;
+    @apply w-full flex gap-1 px-1 flex-row overflow-x-scroll;
     background-color: rgba(0, 0, 0, 0.3);
 }
 .difficultyTab::-webkit-scrollbar {
@@ -68,4 +68,22 @@
 .statDetail {
     @apply w-full flex flex-col;
     background-color: rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 880px) {
+    .contentContainer {
+        @apply flex-col justify-start;
+    }
+
+    .enemyList {
+        @apply h-auto flex-row flex-wrap justify-center;
+    }
+
+    .enemyDetailContainer {
+        @apply w-full h-auto;
+    }
+
+    .enemyDetail {
+        @apply w-full;
+    }
 }

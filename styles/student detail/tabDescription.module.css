@@ -51,7 +51,7 @@
 }
 
 .container3 {
-    @apply mt-1 w-full flex flex-row justify-center;
+    @apply mt-1 w-full flex flex-row flex-wrap justify-center;
     background-color: rgba(0, 0, 0, 0.3);
 }
 
@@ -125,7 +125,7 @@
 /* .terrain.tsx */
 
 .terrainContainer {
-    @apply shrink-0 flex w-24 min-w-12 h-12 mr-1 items-center;
+    @apply shrink-0 flex w-24 min-w-12 h-12 items-center;
 
     background-color: rgba(0, 0, 0, 0.3);
 

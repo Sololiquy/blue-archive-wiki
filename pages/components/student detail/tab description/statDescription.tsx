@@ -6,7 +6,7 @@ import EquipmentGear from "./equipmentGear";
 
 import styles from "@/styles/student detail/tabDescription.module.css";
 
-import { contextDetailStudent } from "../../../studentDetail";
+import { contextDetailStudent } from "../../../layout/studentDetail";
 import { contextAPI } from "../../../_app";
 
 export default function StatDescription({ onTierWeaponChange, handleBondLevelChange }: ProbType) {
@@ -16,7 +16,7 @@ export default function StatDescription({ onTierWeaponChange, handleBondLevelCha
 
     useEffect(() => {
         if (studentData?.Equipment && studentData.Equipment.length > 0) {
-            const findEquipment = (category: string, tier: number) => equipmentDataAPI?.find((equipment) => equipment.Category === category && equipment.Tier === tier);
+            const findEquipment = (category: string, tier: number) => Object.values(equipmentDataAPI || {}).find((equipment: any) => equipment.Category === category && equipment.Tier === tier);
 
             const newEquipments = [
                 findEquipment(studentData.Equipment[0], levelEquipment[0]) ?? null,
@@ -31,11 +31,11 @@ export default function StatDescription({ onTierWeaponChange, handleBondLevelCha
     console.log(studentData);
     if (!studentData) return <div>Loading...</div>;
 
-    const studentWeaponURL = `https://raw.githubusercontent.com/SchaleDB/SchaleDB/main/images/weapon/${studentData?.WeaponImg}.webp`;
-    const roleStudentURL = `https://raw.githubusercontent.com/SchaleDB/SchaleDB/main/images/ui/Role_${studentData?.TacticRole}.png`;
-    const attackTypeURL = "https://raw.githubusercontent.com/SchaleDB/SchaleDB/main/images/ui/Type_Attack.png";
-    const defenseTypeURL = "https://raw.githubusercontent.com/SchaleDB/SchaleDB/main/images/ui/Type_Defense.png";
-    const studentPotraitURL = `https://raw.githubusercontent.com/SchaleDB/SchaleDB/main/images/student/collection/${studentData.Id}.webp`;
+    const studentWeaponURL = `https://schaledb.com/images/weapon/${studentData?.WeaponImg}.webp`;
+    const roleStudentURL = `https://schaledb.com/images/ui/Role_${studentData?.TacticRole}.png`;
+    const attackTypeURL = "https://schaledb.com/images/ui/Type_Attack.png";
+    const defenseTypeURL = "https://schaledb.com/images/ui/Type_Defense.png";
+    const studentPotraitURL = `https://schaledb.com/images/student/collection/${studentData.Id}.webp`;
 
     const attackType = {
         Explosion: "explosiveAttackColor",
@@ -72,8 +72,8 @@ export default function StatDescription({ onTierWeaponChange, handleBondLevelCha
             <div className={styles.studentName}>{studentData?.Name}</div>
             <div className={styles.role}>
                 <div className={styles.starGrade}>
-                    {[...Array(studentData?.StarGrade)].map((_, i) => (
-                        <img className={styles.starIMG} key={i} src="/blue-archive-wiki/star.svg" alt="" />
+                    {Array.from({ length: studentData?.StarGrade }, (_, i) => (
+                        <img className={styles.starIMG} key={i} src="/blue-archive-wiki/star.svg" alt="Star" />
                     ))}
                 </div>
                 <div className={`${styles.typeSquad} ${squadType[0]}`}>{squadType[1]}</div>
@@ -104,9 +104,11 @@ export default function StatDescription({ onTierWeaponChange, handleBondLevelCha
                 <div className={`${styles.roundedContainer} ${defenseType}`}>
                     <img className={styles.defenseTypeImg} src={defenseTypeURL} alt="" />
                 </div>
-                <Terrain terrainType="Street" terrainValue={Number(studentData?.StreetBattleAdaptation) ?? 0} />
-                <Terrain terrainType="Outdoor" terrainValue={Number(studentData?.OutdoorBattleAdaptation) ?? 0} />
-                <Terrain terrainType="Indoor" terrainValue={Number(studentData?.IndoorBattleAdaptation) ?? 0} />
+                <div className="flex flex-row gap-1">
+                    <Terrain terrainType="Street" terrainValue={Number(studentData?.StreetBattleAdaptation) ?? 0} />
+                    <Terrain terrainType="Outdoor" terrainValue={Number(studentData?.OutdoorBattleAdaptation) ?? 0} />
+                    <Terrain terrainType="Indoor" terrainValue={Number(studentData?.IndoorBattleAdaptation) ?? 0} />
+                </div>
             </div>
             <div className={styles.studentStatContainer}>
                 <Stat typeStat="MaxHP" nameStat="Max HP" equipment={equipments} Level={level} levelWeapon={levelWeapon} />

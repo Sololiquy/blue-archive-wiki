@@ -1,14 +1,13 @@
 import React, { useContext } from "react";
 import styles from "@/styles/student detail/tabSkill.module.css";
-import { contextDetailStudent } from "../../../studentDetail";
+import { contextDetailStudent } from "../../../layout/studentDetail";
 import { contextAPI } from "../../../_app";
 
 export default function Skill({ type, level }: VariableType) {
     const { studentData } = useContext(contextDetailStudent);
     const { localizationAPI } = useContext(contextAPI);
-    const skillType = localizationAPI?.ui[`student_skill_${type}` as keyof typeof localizationAPI.ui];
 
-    const Skill = studentData?.Skills.find((skill) => skill.SkillType === type);
+    const Skill = studentData?.Skills[type];
     const parameter1 = Skill?.Parameters?.[0]?.[level - 1] || "";
     const parameter2 = Skill?.Parameters?.[1]?.[level - 1] || "";
     const parameter3 = Skill?.Parameters?.[2]?.[level - 1] || "";
@@ -28,7 +27,7 @@ export default function Skill({ type, level }: VariableType) {
     const description = Skill?.Desc?.replace(/<\?1>/g, `<span class="${attackType[0]}" style="${styleFont}">${parameter1}</span>`)
         .replace(/<\?2>/g, `<span class="${attackType[0]}" style="${styleFont}">${parameter2}</span>`)
         .replace(/<\?3>/g, `<span class="${attackType[0]}" style="${styleFont}">${parameter3}</span>`)
-        .replace(/<(\w+):(\w+)>/g, (_, effect, typeEffect) => {
+        .replace(/<(\w+):(\w+)>/g, (_: string, effect: string, typeEffect: string) => {
             const effects = effect === "b" ? "Buff" : effect === "d" ? "Debuff" : effect === "c" ? "CC" : effect === "s" ? "Special" : "";
             const x = `${effects}_${typeEffect}`;
             const stat = localizationAPI?.BuffName[x as keyof typeof localizationAPI.BuffName];
@@ -38,12 +37,12 @@ export default function Skill({ type, level }: VariableType) {
                 Debuff: ["mysticAttackFontColor"],
                 CC: ["sonicAttackFontColor"],
             }[effects as "Buff" | "CC" | "Debuff" | "CC"] || [""];
-            const iconEffects = `https://raw.githubusercontent.com/SchaleDB/SchaleDB/refs/heads/main/images/buff/${effects}_${typeEffect}.webp`;
+            const iconEffects = `https://schaledb.com/images/buff/${effects}_${typeEffect}.webp`;
             return `<img src="${iconEffects}" alt="${effects} ${typeEffect}" style="${styleIcon}" /><span class="${effectsType}" style="${styleFont}">${stat}</span>`;
         });
 
     //-------------------------------------------------------------------------------------------------------------------------------
-    const skillImgURL = `https://raw.githubusercontent.com/SchaleDB/SchaleDB/refs/heads/main/images/skill/${Skill?.Icon}.webp`;
+    const skillImgURL = `https://schaledb.com/images/skill//${Skill?.Icon}.webp`;
 
     return (
         <div className={styles.skillInfoContainer}>
@@ -56,7 +55,7 @@ export default function Skill({ type, level }: VariableType) {
                     <div className={styles.skillInfoName}>{Skill?.Name}</div>
                     <div className={styles.skillInfoStat}>
                         {type === "ex" && <div className={styles.skillInfoStatCost}>{`${Skill?.Cost?.[level - 1] || "N/A"} COST`}</div>}
-                        <div className={styles.skillInfoType}>{type === "ex" ? "Ex Skill" : skillType}</div>
+                        <div className={styles.skillInfoType}>{type === "ex" ? "Ex Skill" : type}</div>
                     </div>
                 </div>
             </div>

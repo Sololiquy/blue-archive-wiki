@@ -2,20 +2,20 @@ import React, { useContext, useEffect, useState } from "react";
 
 import styles from "@/styles/student detail/tabDescription.module.css";
 
-import { contextDetailStudent } from "../../../studentDetail";
+import { contextDetailStudent } from "../../../layout/studentDetail";
 
 export default function EquipmentGear({ levelEquipmentGear, setLevelEquipmentGear }: PropType) {
     const { studentData } = useContext(contextDetailStudent);
-    const equipmentURL = `https://raw.githubusercontent.com/SchaleDB/SchaleDB/refs/heads/main/images/gear/full/${studentData?.Id}.webp`;
+    const equipmentURL = `https://schaledb.com//images/gear/icon/${studentData?.Id}.webp`;
     const [equipmentImgSrc, setEquipmentImgSrc] = useState(equipmentURL);
 
     useEffect(() => {
         const check = async (url: string) => {
             try {
                 const response = await fetch(equipmentURL);
-                setEquipmentImgSrc(response.ok ? url : "https://raw.githubusercontent.com/SchaleDB/SchaleDB/refs/heads/main/images/gear/empty.png");
+                setEquipmentImgSrc(response.ok ? url : "https://schaledb.com/images/gear/empty.png");
             } catch {
-                setEquipmentImgSrc("https://raw.githubusercontent.com/SchaleDB/SchaleDB/refs/heads/main/images/gear/empty.png");
+                setEquipmentImgSrc("https://schaledb.com/images/gear/empty.png");
             }
         };
         if (equipmentURL) check(equipmentURL);
