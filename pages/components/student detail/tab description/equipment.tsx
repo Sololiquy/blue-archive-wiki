@@ -22,11 +22,11 @@ export default function Equipment({ typeEquipment, levelEquipment, setLevelEquip
             </div>
             <div className={styles.equipmentLevel}>
                 <div className={styles.equipmentLevelArrowContainer} onClick={levelEquipment > 0 ? () => handleEquipmentLevelDecrease() : undefined}>
-                    <img className={styles.equipmentLevelArrowDecrease} src="/blue-archive-wiki/arrow.svg" alt="" />
+                    <img className={styles.equipmentLevelArrowDecrease} src="./blue-archive-wiki/arrow.svg" alt="" />
                 </div>
                 <div className={styles.equipmentLevelInfo}>T{levelEquipment}</div>
                 <div className={styles.equipmentLevelArrowContainer} onClick={levelEquipment < 9 ? () => handleEquipmentLevelIncrease() : undefined}>
-                    <img className={styles.equipmentLevelArrowIncrease} src="/blue-archive-wiki/arrow.svg" alt="" />
+                    <img className={styles.equipmentLevelArrowIncrease} src="./blue-archive-wiki/arrow.svg" alt="" />
                 </div>
             </div>
         </div>
