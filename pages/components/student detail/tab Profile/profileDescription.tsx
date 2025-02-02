@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import styles from "@/styles/student detail/tabProfile.module.css";
 
-import { contextDetailStudent } from "../../../layout/studentDetail/[id]";
+import { contextDetailStudent } from "../../../studentDetail";
 import { contextAPI } from "../../../_app";
 
 export default function ProfileDescription() {

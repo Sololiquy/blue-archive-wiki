@@ -3,7 +3,7 @@ import Skill from "./skill";
 
 import styles from "@/styles/student detail/tabSkill.module.css";
 
-import { contextDetailStudent } from "../../../layout/studentDetail/[id]";
+import { contextDetailStudent } from "../../../studentDetail";
 
 export default function SkillDescription({ onTierWeaponChange }: PropType) {
     const { studentData, tierWeapon, levelEquipment } = useContext(contextDetailStudent);

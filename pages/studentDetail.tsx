@@ -1,15 +1,15 @@
 import { useRouter } from "next/router";
 import React, { useContext, createContext, useState, ChangeEvent } from "react";
 
-import StatDescription from "../../components/student detail/tab description/statDescription";
-import SkillDescription from "../../components/student detail/tab skill/skillDescription";
-import ProfileDescription from "../../components/student detail/tab Profile/profileDescription";
-import VoiceDescription from "../../components/student detail/tab voice/voiceDescription";
-import Tab from "../../components/student detail/tab";
+import StatDescription from "./components/student detail/tab description/statDescription";
+import SkillDescription from "./components/student detail/tab skill/skillDescription";
+import ProfileDescription from "./components/student detail/tab Profile/profileDescription";
+import VoiceDescription from "./components/student detail/tab voice/voiceDescription";
+import Tab from "./components/student detail/tab";
 
 import styles from "@/styles/student detail/studentDetail.module.css";
 
-import { contextAPI } from "../../_app";
+import { contextAPI } from "./_app";
 
 export default function StudentDetail() {
     const { query } = useRouter();

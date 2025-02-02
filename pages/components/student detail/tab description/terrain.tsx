@@ -2,7 +2,7 @@ import { useContext } from "react";
 
 import styles from "@/styles/student detail/tabDescription.module.css";
 
-import { contextDetailStudent } from "../../../layout/studentDetail/[id]";
+import { contextDetailStudent } from "../../../studentDetail";
 
 export default function Terrain({ terrainType, terrainValue }: VariableType) {
     const { studentData, tierWeapon } = useContext(contextDetailStudent);

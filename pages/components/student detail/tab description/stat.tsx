@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 
-import { contextDetailStudent } from "../../../layout/studentDetail/[id]";
+import { contextDetailStudent } from "../../../studentDetail";
 
 import styles from "@/styles/student detail/tabDescription.module.css";
 

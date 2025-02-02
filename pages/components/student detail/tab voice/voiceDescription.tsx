@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import Voice from "./voice";
 import VoiceTab from "./voiceTab";
 import styles from "@/styles/student detail/tabVoiceDescription.module.css";
-import { contextDetailStudent } from "../../../layout/studentDetail/[id]";
+import { contextDetailStudent } from "../../../studentDetail";
 
 export default function VoiceDescription() {
     const { studentvoiceData } = useContext(contextDetailStudent) as { studentvoiceData?: VoiceData };
