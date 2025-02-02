@@ -21,6 +21,8 @@ export default function tabDescription({ difficulty, active, setEnemyDifficulty 
         difficultyScale = 5;
     } else if (difficulty === "TORMENT") {
         difficultyScale = 6;
+    } else if (difficulty === "LUNATIC") {
+        difficultyScale = 7;
     }
 
     return (

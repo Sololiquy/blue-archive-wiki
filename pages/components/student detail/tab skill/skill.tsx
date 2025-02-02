@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import styles from "@/styles/student detail/tabSkill.module.css";
-import { contextDetailStudent } from "../../../layout/studentDetail";
+import { contextDetailStudent } from "../../../layout/studentDetail/[id]";
 import { contextAPI } from "../../../_app";
 
 export default function Skill({ type, level }: VariableType) {
@@ -45,22 +45,42 @@ export default function Skill({ type, level }: VariableType) {
     const skillImgURL = `https://schaledb.com/images/skill//${Skill?.Icon}.webp`;
 
     return (
-        <div className={styles.skillInfoContainer}>
-            <div className={styles.skillInfoHeader}>
-                <div className={styles.skillIcon}>
-                    <img className={styles.skillIconImg} src={skillImgURL} alt="" />
-                    <img className={styles.skillIconBG} src={`/blue-archive-wiki/bg-Icon_${attackType[1]}.svg`} alt="" />
-                </div>
-                <div>
-                    <div className={styles.skillInfoName}>{Skill?.Name}</div>
-                    <div className={styles.skillInfoStat}>
-                        {type === "ex" && <div className={styles.skillInfoStatCost}>{`${Skill?.Cost?.[level - 1] || "N/A"} COST`}</div>}
-                        <div className={styles.skillInfoType}>{type === "ex" ? "Ex Skill" : type}</div>
+        <>
+            <div className={styles.skillInfoContainer}>
+                <div className={styles.skillInfoHeader}>
+                    <div className={styles.skillIcon}>
+                        <img className={styles.skillIconImg} src={skillImgURL} alt="" />
+                        <img className={styles.skillIconBG} src={`/blue-archive-wiki/bg-Icon_${attackType[1]}.svg`} alt="" />
+                    </div>
+                    <div>
+                        <div className={styles.skillInfoName}>{Skill?.Name}</div>
+                        <div className={styles.skillInfoStat}>
+                            {type === "ex" && <div className={styles.skillInfoStatCost}>{`${Skill?.Cost?.[level - 1] || "N/A"} COST`}</div>}
+                            <div className={styles.skillInfoType}>{type === "ex" ? "Ex Skill" : type}</div>
+                        </div>
                     </div>
                 </div>
+                <div className={styles.skillInfoDescription} dangerouslySetInnerHTML={{ __html: description ?? "" }}></div>
             </div>
-            <div className={styles.skillInfoDescription} dangerouslySetInnerHTML={{ __html: description ?? "" }}></div>
-        </div>
+            {/* {studentData?.Skills?.[type]?.ExtraSkills && (
+                <div className={styles.skillInfoContainer}>
+                    <div className={styles.skillInfoHeader}>
+                        <div className={styles.skillIcon}>
+                            <img className={styles.skillIconImg} src={skillImgURL} alt="" />
+                            <img className={styles.skillIconBG} src={`/blue-archive-wiki/bg-Icon_${attackType[1]}.svg`} alt="" />
+                        </div>
+                        <div>
+                            <div className={styles.skillInfoName}>{Skill?.Name}</div>
+                            <div className={styles.skillInfoStat}>
+                                {type === "ex" && <div className={styles.skillInfoStatCost}>{`${Skill?.Cost?.[level - 1] || "N/A"} COST`}</div>}
+                                <div className={styles.skillInfoType}>{type === "ex" ? "Ex Skill" : type}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className={styles.skillInfoDescription} dangerouslySetInnerHTML={{ __html: description ?? "" }}></div>
+                </div>
+            )} */}
+        </>
     );
 }
 

@@ -9,8 +9,8 @@ export default function Card({ ID, enemyType, handleEnemyID }: PropType) {
     const enemyData = enemyAPI?.Raid?.find((enemy) => enemy.Id === ID);
     const arrayIndex: number = enemyAPI?.Raid?.findIndex((enemy) => enemy.Id === ID) || 0;
 
-    const enemyImgURL = `https://schaledb.com/refs/heads/main/images/raid/Boss_Portrait_${enemyData?.PathName}_Lobby.png`;
-    const enemyBGImgURL = `https://schaledb.com/refs/heads/main/images/raid/Boss_Portrait_${enemyData?.PathName}_LobbyBG.png`;
+    const enemyImgURL = `https://schaledb.com/images/raid/Boss_Portrait_${enemyData?.DevName}_Lobby.png`;
+    const enemyBGImgURL = `https://schaledb.com/images/raid/Boss_Portrait_${enemyData?.DevName}_LobbyBG.png`;
     return (
         <>
             <div className={styles.containerCard} onClick={() => handleEnemyID(arrayIndex, enemyType)}>
@@ -29,7 +29,7 @@ interface PropType {
 
 interface Enemy {
     Id: number;
-    PathName: string;
+    DevName: string;
 }
 interface EnemyAPI {
     Raid?: Enemy[];

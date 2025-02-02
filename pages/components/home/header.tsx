@@ -13,11 +13,11 @@ const Header = () => {
                     <Link href="/">Home</Link>
                 </div>
                 <div className={styles.studentList}>
-                    <Link href="/layout/studentList">Student</Link>
+                    <Link href="/studentList">Student</Link>
                 </div>
-                {/* <div className={styles.enemyList}>
-                    <Link href="/layout/enemyDetail">Enemy</Link>
-                </div> */}
+                <div className={styles.enemyList}>
+                    <Link href="/enemyDetail">Enemy</Link>
+                </div>
             </div>
         </>
     );

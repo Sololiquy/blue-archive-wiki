@@ -8,8 +8,8 @@ export default function Banner({ enemyID, enemyDifficulty }: PropType) {
 
     const enemyData = enemyAPI?.Raid ? enemyAPI.Raid[enemyID[0]] : null;
 
-    const enemyImgURL = `https://schaledb.com/refs/heads/main/images/raid/Boss_Portrait_${enemyData?.PathName}_${enemyDifficulty >= 5 ? "Insane_" : ""}Lobby.png`;
-    const enemyBGImgURL = `https://schaledb.com/refs/heads/main/images/raid/Boss_Portrait_${enemyData?.PathName}_LobbyBG.png`;
+    const enemyImgURL = `https://schaledb.com/images/raid/Boss_Portrait_${enemyData?.DevName}_${enemyDifficulty >= 5 ? "Insane_" : ""}Lobby.png`;
+    const enemyBGImgURL = `https://schaledb.com/images/raid/Boss_Portrait_${enemyData?.DevName}_LobbyBG.png`;
 
     return (
         <>
@@ -25,7 +25,7 @@ interface PropType {
 }
 
 interface Enemy {
-    PathName: string;
+    DevName: string;
 }
 interface EnemyAPI {
     Raid?: Enemy[];
