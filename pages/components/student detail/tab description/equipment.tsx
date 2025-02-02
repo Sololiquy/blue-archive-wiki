@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 
 import styles from "@/styles/student detail/tabDescription.module.css";
 
-import { contextDetailStudent } from "../../../layout/studentDetail/[id]";
+import { contextDetailStudent } from "../../../studentDetail";
 
 export default function Equipment({ typeEquipment, levelEquipment, setLevelEquipment }: PropType) {
     const { studentData } = useContext(contextDetailStudent);
@@ -25,7 +25,7 @@ export default function Equipment({ typeEquipment, levelEquipment, setLevelEquip
                     <img className={styles.equipmentLevelArrowDecrease} src="/blue-archive-wiki/arrow.svg" alt="" />
                 </div>
                 <div className={styles.equipmentLevelInfo}>T{levelEquipment}</div>
-                <div className={styles.equipmentLevelArrowContainer} onClick={levelEquipment < 9 ? () => handleEquipmentLevelIncrease() : undefined}>
+                <div className={styles.equipmentLevelArrowContainer} onClick={levelEquipment < 10 ? () => handleEquipmentLevelIncrease() : undefined}>
                     <img className={styles.equipmentLevelArrowIncrease} src="/blue-archive-wiki/arrow.svg" alt="" />
                 </div>
             </div>

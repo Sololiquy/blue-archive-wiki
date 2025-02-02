@@ -2,24 +2,18 @@ import React, { useContext, useEffect, useState } from "react";
 
 import styles from "@/styles/student detail/tabDescription.module.css";
 
-import { contextDetailStudent } from "../../../layout/studentDetail/[id]";
+import { contextDetailStudent } from "../../../studentDetail";
 
 export default function EquipmentGear({ levelEquipmentGear, setLevelEquipmentGear }: PropType) {
     const { studentData } = useContext(contextDetailStudent);
-    const equipmentURL = `https://schaledb.com//images/gear/icon/${studentData?.Id}.webp`;
-    const [equipmentImgSrc, setEquipmentImgSrc] = useState(equipmentURL);
-
+    const [equipmentImgSrc, setEquipmentImgSrc] = useState<string>(``);
     useEffect(() => {
-        const check = async (url: string) => {
-            try {
-                const response = await fetch(equipmentURL);
-                setEquipmentImgSrc(response.ok ? url : "https://schaledb.com/images/gear/empty.png");
-            } catch {
-                setEquipmentImgSrc("https://schaledb.com/images/gear/empty.png");
-            }
-        };
-        if (equipmentURL) check(equipmentURL);
-    }, [equipmentURL]);
+        if (studentData.Gear && Object.keys(studentData.Gear).length > 0) {
+            setEquipmentImgSrc(`https://schaledb.com/images/gear/icon/${studentData?.Id}.webp`);
+        } else {
+            setEquipmentImgSrc(`https://schaledb.com/images/gear/empty.png`);
+        }
+    }, [equipmentImgSrc]);
 
     const handleEquipmentLevelDecrease = () => {
         setLevelEquipmentGear(levelEquipmentGear - 1);

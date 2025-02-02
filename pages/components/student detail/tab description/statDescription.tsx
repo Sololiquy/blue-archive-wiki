@@ -6,7 +6,7 @@ import EquipmentGear from "./equipmentGear";
 
 import styles from "@/styles/student detail/tabDescription.module.css";
 
-import { contextDetailStudent } from "../../../layout/studentDetail/[id]";
+import { contextDetailStudent } from "../../../studentDetail";
 import { contextAPI } from "../../../_app";
 
 export default function StatDescription({ onTierWeaponChange, handleBondLevelChange }: ProbType) {

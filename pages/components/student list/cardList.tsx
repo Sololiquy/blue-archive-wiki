@@ -7,7 +7,7 @@ export default function CardList({ id, name, school }: ParameterType) {
 
     return (
         <div className={styles.card}>
-            <Link href={`/studentDetail/${id}`}>
+            <Link href={`/studentDetail?id=${id}`}>
                 <img className={styles.studentPotrait} src={studentPotraitURL} alt="" />
             </Link>
             <img className={styles.studentSchool} src={studentSchoolURL} alt="" />
