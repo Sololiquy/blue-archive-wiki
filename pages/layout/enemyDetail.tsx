@@ -24,7 +24,7 @@ export default function EnemyDetail() {
             <div className={styles.background}></div>
             <div className={styles.contentContainer}>
                 <div className={styles.enemyListContainer}>
-                    <div className={styles.tab}>enemytype</div>
+                    <div className={styles.tab}>RAID</div>
                     <div className={styles.enemyList}>
                         {enemyAPI?.Raid?.map((enemy) => (
                             <Card key={enemy.Id} ID={enemy.Id} enemyType="Raid" handleEnemyID={handleEnemy} />
@@ -44,6 +44,7 @@ export default function EnemyDetail() {
                         <TabDescription difficulty="EXTREME" setEnemyDifficulty={setEnemyDifficulty} active={enemyDifficulty === 4} />
                         <TabDescription difficulty="INSANE" setEnemyDifficulty={setEnemyDifficulty} active={enemyDifficulty === 5} />
                         <TabDescription difficulty="TORMENT" setEnemyDifficulty={setEnemyDifficulty} active={enemyDifficulty === 6} />
+                        <TabDescription difficulty="LUNATIC" setEnemyDifficulty={setEnemyDifficulty} active={enemyDifficulty === 7} />
                     </div>
                     <div className={styles.enemyDetail}>
                         <div className={styles.statDetail}>

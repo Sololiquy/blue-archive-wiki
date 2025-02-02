@@ -9,6 +9,23 @@ const nextConfig: NextConfig = {
         unoptimized: true,
     },
     reactStrictMode: true,
+
+    async rewrites() {
+        return [
+            {
+                source: "/studentList",
+                destination: "/layout/studentList",
+            },
+            {
+                source: "/studentDetail/:id",
+                destination: "/layout/studentDetail/:id",
+            },
+            {
+                source: "/enemyDetail",
+                destination: "/layout/enemyDetail",
+            },
+        ];
+    },
 };
 
 export default nextConfig;

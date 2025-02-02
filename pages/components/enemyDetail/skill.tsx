@@ -5,7 +5,6 @@ import { contextAPI } from "../../_app";
 export default function Skill({ data, difficulty }: SkillProps) {
     const skillSelected = data;
     const { localizationAPI } = useContext(contextAPI);
-    console.log(skillSelected);
 
     const parameter1 = skillSelected?.Parameters?.[0]?.[difficulty] || "";
     const parameter2 = skillSelected?.Parameters?.[1]?.[difficulty] || "";
@@ -33,13 +32,13 @@ export default function Skill({ data, difficulty }: SkillProps) {
                 Debuff: ["mysticAttackFontColor"],
                 CC: ["sonicAttackFontColor"],
             }[effects as "Buff" | "CC" | "Debuff" | "CC"] || [""];
-            const iconEffects = `https://schaledb.com/refs/heads/main/images/buff/${effects}_${typeEffect}.webp`;
+            const iconEffects = `https://schaledb.com/images/buff/${effects}_${typeEffect}.webp`;
             return `<img src="${iconEffects}" alt="${effects} ${typeEffect}" style="${styleIcon}" /><span class="${effectsType}" style="${styleFont}">${stat}</span>`;
         });
 
     //-------------------------------------------------------------------------------------------------------------------------------
 
-    const iconSkill = `https://schaledb.com/refs/heads/main/images/raid/skill/${skillSelected?.Icon}.png`;
+    const iconSkill = `https://schaledb.com/images/skill/raid/${skillSelected?.Icon}.webp`;
 
     if (skillSelected?.SkillType !== "raidautoattack") {
         return (

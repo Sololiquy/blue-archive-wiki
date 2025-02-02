@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 
 import styles from "@/styles/student detail/tabDescription.module.css";
 
-import { contextDetailStudent } from "../../../layout/studentDetail";
+import { contextDetailStudent } from "../../../layout/studentDetail/[id]";
 
 export default function EquipmentGear({ levelEquipmentGear, setLevelEquipmentGear }: PropType) {
     const { studentData } = useContext(contextDetailStudent);
@@ -35,11 +35,11 @@ export default function EquipmentGear({ levelEquipmentGear, setLevelEquipmentGea
                 </div>
                 <div className={styles.equipmentLevel}>
                     <div className={styles.equipmentLevelArrowContainer} onClick={levelEquipmentGear > 0 ? () => handleEquipmentLevelDecrease() : undefined}>
-                        <img className={styles.equipmentLevelArrowDecrease} src="/arrow.svg" alt="" />
+                        <img className={styles.equipmentLevelArrowDecrease} src="/blue-archive-wiki/arrow.svg" alt="" />
                     </div>
                     <div className={styles.equipmentLevelInfo}>T{levelEquipmentGear}</div>
                     <div className={styles.equipmentLevelArrowContainer} onClick={levelEquipmentGear < 2 ? () => handleEquipmentLevelIncrease() : undefined}>
-                        <img className={styles.equipmentLevelArrowIncrease} src="/arrow.svg" alt="" />
+                        <img className={styles.equipmentLevelArrowIncrease} src="/blue-archive-wiki/arrow.svg" alt="" />
                     </div>
                 </div>
             </div>
