@@ -1,1 +1,1 @@
-API from is from https://github.com/SchaleDB
+API from https://github.com/SchaleDB
