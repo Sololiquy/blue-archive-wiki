@@ -13,7 +13,7 @@ export default function EquipmentGear({ levelEquipmentGear, setLevelEquipmentGea
         } else {
             setEquipmentImgSrc(`https://schaledb.com/images/gear/empty.png`);
         }
-    }, [equipmentImgSrc]);
+    }, [levelEquipmentGear]);
 
     const handleEquipmentLevelDecrease = () => {
         setLevelEquipmentGear(levelEquipmentGear - 1);

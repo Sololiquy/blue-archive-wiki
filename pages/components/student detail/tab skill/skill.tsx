@@ -3,14 +3,9 @@ import styles from "@/styles/student detail/tabSkill.module.css";
 import { contextDetailStudent } from "../../../studentDetail";
 import { contextAPI } from "../../../_app";
 
-export default function Skill({ type, level }: VariableType) {
+export default function Skill({ type, level }: parameterType) {
     const { studentData } = useContext(contextDetailStudent);
     const { localizationAPI } = useContext(contextAPI);
-
-    const Skill = studentData?.Skills[type];
-    const parameter1 = Skill?.Parameters?.[0]?.[level - 1] || "";
-    const parameter2 = Skill?.Parameters?.[1]?.[level - 1] || "";
-    const parameter3 = Skill?.Parameters?.[2]?.[level - 1] || "";
 
     const attackType = {
         Explosion: ["explosiveAttackFontColor", "explosive"],
@@ -22,27 +17,56 @@ export default function Skill({ type, level }: VariableType) {
     const styleIcon = "translate: 0px -2px; height:22px; width:auto; display:inline-flex";
     const styleFont = "font-weight: bold; margin-left:2px";
 
-    // REGEX for desription-----------------------------------------------------------------------------------------------------------
+    // REGEX for description -----------------------------------------------------------------------------------------------------------
 
-    const description = Skill?.Desc?.replace(/<\?1>/g, `<span class="${attackType[0]}" style="${styleFont}">${parameter1}</span>`)
-        .replace(/<\?2>/g, `<span class="${attackType[0]}" style="${styleFont}">${parameter2}</span>`)
-        .replace(/<\?3>/g, `<span class="${attackType[0]}" style="${styleFont}">${parameter3}</span>`)
-        .replace(/<(\w+):(\w+)>/g, (_: string, effect: string, typeEffect: string) => {
-            const effects = effect === "b" ? "Buff" : effect === "d" ? "Debuff" : effect === "c" ? "CC" : effect === "s" ? "Special" : "";
-            const x = `${effects}_${typeEffect}`;
-            const stat = localizationAPI?.BuffName[x as keyof typeof localizationAPI.BuffName];
-            const effectsType = {
-                Buff: ["explosiveAttackFontColor"],
-                Special: ["piercingAttackFontColor"],
-                Debuff: ["mysticAttackFontColor"],
-                CC: ["sonicAttackFontColor"],
-            }[effects as "Buff" | "CC" | "Debuff" | "CC"] || [""];
-            const iconEffects = `https://schaledb.com/images/buff/${effects}_${typeEffect}.webp`;
-            return `<img src="${iconEffects}" alt="${effects} ${typeEffect}" style="${styleIcon}" /><span class="${effectsType}" style="${styleFont}">${stat}</span>`;
-        });
+    const description = studentData?.Skills[type]?.Desc?.replace(/<\?(\d+)>/g, (_: string, index: number) => {
+        const parameter = studentData?.Skills[type]?.Parameters?.[index - 1]?.[level - 1] || "";
+        return `<span class="${attackType[0]}" style="${styleFont}">${parameter || "?"}</span>`;
+    }).replace(/<(\w+):(\w+)>/g, (_: string, effect: string, typeEffect: string) => {
+        const effects = effect === "b" ? "Buff" : effect === "d" ? "Debuff" : effect === "c" ? "CC" : effect === "s" ? "Special" : "";
+        const x = `${effects}_${typeEffect}`;
+        const stat = localizationAPI?.BuffName[x as keyof typeof localizationAPI.BuffName];
+        const effectsType = {
+            Buff: ["explosiveAttackFontColor"],
+            Special: ["piercingAttackFontColor"],
+            Debuff: ["mysticAttackFontColor"],
+            CC: ["sonicAttackFontColor"],
+        }[effects as "Buff" | "CC" | "Debuff" | "CC"] || [""];
 
-    //-------------------------------------------------------------------------------------------------------------------------------
-    const skillImgURL = `https://schaledb.com/images/skill//${Skill?.Icon}.webp`;
+        const iconEffects = `https://schaledb.com/images/buff/${effects}_${typeEffect}.webp`;
+        return `<img src="${iconEffects}" alt="${effects} ${typeEffect}" style="${styleIcon}" /><span class="${effectsType}" style="${styleFont}">${stat}</span>`;
+    });
+
+    const skillImgURL = `https://schaledb.com/images/skill//${studentData?.Skills[type]?.Icon}.webp`;
+
+    const extraSkillCount = studentData?.Skills[type]?.ExtraSkills?.length;
+    const extraDescription: string[] = [];
+    const extraSkillImgURL: string[] = [];
+    if (extraSkillCount > 0) {
+        for (let i = 0; i < extraSkillCount; i++) {
+            extraDescription[i] = studentData?.Skills[type]?.ExtraSkills[i]?.Desc?.replace(/<\?(\d+)>/g, (_: string, index: number) => {
+                const parameter = studentData?.Skills[type]?.ExtraSkills[i]?.Parameters?.[index - 1]?.[level - 1] || "";
+                return `<span class="${attackType[0]}" style="${styleFont}">${parameter || "?"}</span>`;
+            }).replace(/<(\w+):(\w+)>/g, (_: string, effect: string, typeEffect: string) => {
+                const effects = effect === "b" ? "Buff" : effect === "d" ? "Debuff" : effect === "c" ? "CC" : effect === "s" ? "Special" : "";
+                const x = `${effects}_${typeEffect}`;
+                const stat = localizationAPI?.BuffName[x as keyof typeof localizationAPI.BuffName];
+                const effectsType = {
+                    Buff: ["explosiveAttackFontColor"],
+                    Special: ["piercingAttackFontColor"],
+                    Debuff: ["mysticAttackFontColor"],
+                    CC: ["sonicAttackFontColor"],
+                }[effects as "Buff" | "CC" | "Debuff" | "CC"] || [""];
+
+                const iconEffects = `https://schaledb.com/images/buff/${effects}_${typeEffect}.webp`;
+                return `<img src="${iconEffects}" alt="${effects} ${typeEffect}" style="${styleIcon}" /><span class="${effectsType}" style="${styleFont}">${stat}</span>`;
+            });
+
+            extraSkillImgURL[i] = `https://schaledb.com/images/skill/${studentData?.Skills[type]?.ExtraSkills[i]?.Icon}.webp`;
+        }
+    }
+
+    //----------------------------------------------------------------------------------------------------------------------------
 
     return (
         <>
@@ -53,38 +77,38 @@ export default function Skill({ type, level }: VariableType) {
                         <img className={styles.skillIconBG} src={`/blue-archive-wiki/bg-Icon_${attackType[1]}.svg`} alt="" />
                     </div>
                     <div>
-                        <div className={styles.skillInfoName}>{Skill?.Name}</div>
+                        <div className={styles.skillInfoName}>{studentData?.Skills[type]?.Name}</div>
                         <div className={styles.skillInfoStat}>
-                            {type === "ex" && <div className={styles.skillInfoStatCost}>{`${Skill?.Cost?.[level - 1] || "N/A"} COST`}</div>}
-                            <div className={styles.skillInfoType}>{type === "ex" ? "Ex Skill" : type}</div>
+                            {type === "Ex" && <div className={styles.skillInfoStatCost}>{`${studentData?.Skills[type]?.Cost?.[level - 1] || "0"} COST`}</div>}
+                            <div className={styles.skillInfoType}>{type === "Ex" ? "Ex Skill" : type}</div>
                         </div>
                     </div>
                 </div>
                 <div className={styles.skillInfoDescription} dangerouslySetInnerHTML={{ __html: description ?? "" }}></div>
             </div>
-            {/* {studentData?.Skills?.[type]?.ExtraSkills && (
-                <div className={styles.skillInfoContainer}>
+            {Array.from({ length: studentData?.Skills?.[type]?.ExtraSkills?.length }, (_, i) => (
+                <div className={styles.skillInfoContainer} key={i}>
                     <div className={styles.skillInfoHeader}>
+                        <div className="h-[80%] w-1 bg-white ml-2"></div>
                         <div className={styles.skillIcon}>
-                            <img className={styles.skillIconImg} src={skillImgURL} alt="" />
+                            <img className={styles.skillIconImg} src={extraSkillImgURL[i]} alt="" />
                             <img className={styles.skillIconBG} src={`/blue-archive-wiki/bg-Icon_${attackType[1]}.svg`} alt="" />
                         </div>
                         <div>
-                            <div className={styles.skillInfoName}>{Skill?.Name}</div>
+                            <div className={styles.skillInfoName}>{studentData?.Skills?.[type]?.ExtraSkills[i]?.Name}</div>
                             <div className={styles.skillInfoStat}>
-                                {type === "ex" && <div className={styles.skillInfoStatCost}>{`${Skill?.Cost?.[level - 1] || "N/A"} COST`}</div>}
-                                <div className={styles.skillInfoType}>{type === "ex" ? "Ex Skill" : type}</div>
+                                {type === "Ex" && <div className={styles.skillInfoStatCost}>{`${studentData?.Skills?.[type]?.ExtraSkills[i]?.Cost?.[level - 1] || "0"} COST`}</div>}
                             </div>
                         </div>
                     </div>
-                    <div className={styles.skillInfoDescription} dangerouslySetInnerHTML={{ __html: description ?? "" }}></div>
+                    <div className={styles.skillInfoDescription} dangerouslySetInnerHTML={{ __html: extraDescription[i] ?? "" }}></div>
                 </div>
-            )} */}
+            ))}
         </>
     );
 }
 
-interface VariableType {
+interface parameterType {
     type: string;
     level: number;
 }
