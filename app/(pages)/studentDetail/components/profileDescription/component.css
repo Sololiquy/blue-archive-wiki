@@ -1,0 +1,23 @@
+.starGrade {
+   @apply shrink-0 h-7 px-3 ml-1 rounded-full flex flex-row allCenter;
+}
+
+.weaponContainer {
+   @apply h-[150px] w-full mt-1 flex flex-col justify-center;
+}
+
+.schoolContainer {
+   @apply w-full h-20 mt-1 flex flex-row;
+}
+
+.metadataName {
+   @apply ml-2 text-base flex-grow overflow-hidden whitespace-nowrap text-ellipsis;
+}
+
+.metadataValue {
+   @apply ml-5 text-base font-bold mr-2 flex-shrink-0;
+}
+
+.introductionContainer {
+   @apply mt-1 p-2 text-base text-justify tracking-wide;
+}

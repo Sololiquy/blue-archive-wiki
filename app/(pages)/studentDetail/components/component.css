@@ -1,0 +1,21 @@
+/* tab.tsx */
+
+.tabContainer {
+   @apply w-20 h-20 rounded-l-full flex allCenter;
+
+   background-color: rgba(0, 0, 0, 0.3);
+}
+.tabInnerContainer {
+   @apply size-16 rounded-full flex allCenter;
+   background-color: rgb(227, 227, 227);
+   color: black;
+}
+
+@media (max-width: 768px) {
+   .tabContainer {
+      @apply w-20 h-auto p-2 rounded-l-none rounded-t-[20px];
+   }
+   .tabInnerContainer {
+      @apply h-auto rounded-full;
+   }
+}

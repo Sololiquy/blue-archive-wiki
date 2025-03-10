@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+   --background: #ffffff;
+   --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+   :root {
+      --background: #0a0a0a;
+      --foreground: #ededed;
+   }
+}
+
+body {
+   @apply w-screen h-screen overflow-hidden;
+   color: var(--foreground);
+   background: var(--background);
+   font-family: Arial, Helvetica, sans-serif;
+}
+
+@media (max-width: 768px) {
+   body {
+      @apply h-auto overflow-y-auto;
+   }
+}
+
+@layer components {
+   .backgroundContainer {
+      @apply fixed inset-0 w-full h-full z-[-100];
+   }
+
+   .contentContainer {
+      @apply w-full h-full relative flex;
+   }
+}
+
+@layer utilities {
+   .allCenter {
+      @apply flex items-center justify-center;
+   }
+}
+
+/* color picker */
+.strikerRoleColor {
+   background-color: rgb(204, 26, 37) !important;
+}
+.specialRoleColor {
+   background-color: rgb(0, 107, 255) !important;
+}
+.explosiveAttackColor,
+.lightArmorColor {
+   background-color: rgb(167, 12, 25) !important;
+}
+.piercingAttackColor,
+.heavyArmorColor {
+   background-color: rgb(176, 108, 31) !important;
+}
+.mysticAttackColor,
+.specialArmorColor {
+   background-color: rgb(33, 111, 156) !important;
+}
+.sonicAttackColor,
+.elasticArmorColor {
+   background-color: rgb(148, 49, 165) !important;
+}
+
+.explosiveAttackFontColor {
+   color: red !important;
+}
+.piercingAttackFontColor {
+   color: rgb(255, 136, 0) !important;
+}
+.mysticAttackFontColor {
+   color: rgb(0, 162, 255) !important;
+}
+.sonicAttackFontColor {
+   color: rgb(217, 0, 255) !important;
+}
