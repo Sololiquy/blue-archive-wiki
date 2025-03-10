@@ -1,0 +1,10 @@
+/* voiceDescription.tsx */
+
+/* voice-tsx */
+
+/* voiceTab.tsx */
+
+.tabVoice {
+   @apply w-24 h-8 m-1 rounded-md flex allCenter;
+   color: rgba(255, 255, 255, 0.3);
+}

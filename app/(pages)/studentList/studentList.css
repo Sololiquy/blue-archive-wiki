@@ -1,0 +1,48 @@
+.scrollContainer {
+   @apply w-full flex flex-col pt-12 pb-1 z-0 overflow-x-hidden;
+}
+.scrollContainer::-webkit-scrollbar {
+   width: 5px;
+}
+.scrollContainer::-webkit-scrollbar-thumb {
+   @apply rounded-full;
+   background-color: #ffffff;
+}
+.scrollContainer::-webkit-scrollbar-thumb:hover {
+   background-color: #555;
+}
+
+.filter {
+   @apply h-12 w-[500px] top-11 left-14 flex flex-row fixed rounded-full backdrop-blur-lg allCenter z-50;
+}
+
+@media (max-width: 768px) {
+   .filter {
+      @apply w-full top-0 left-auto rounded-none;
+   }
+
+   .containerScroll {
+      @apply h-screen -top-[25px] pt-9;
+   }
+}
+
+/* cardList.tsx */
+
+.card {
+   @apply w-36 h-auto p-2 flex flex-col items-center overflow-hidden;
+   border: 2px solid rgb(255, 255, 255);
+}
+
+.studentPotrait {
+   @apply size-32 rounded-full object-cover;
+}
+
+@media (max-width: 768px) {
+   .card {
+      @apply w-20;
+   }
+
+   .studentPotrait {
+      @apply size-16 rounded-full object-cover;
+   }
+}

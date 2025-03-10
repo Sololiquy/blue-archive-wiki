@@ -1,0 +1,9 @@
+.headerContainer {
+   @apply h-10 w-dvw pl-5 backdrop-blur-md relative flex flex-row items-center top-0 z-50;
+}
+
+@media (max-width: 768px) {
+   .headerContainer {
+      @apply relative top-auto;
+   }
+}

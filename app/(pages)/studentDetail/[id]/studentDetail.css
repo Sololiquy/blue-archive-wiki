@@ -1,0 +1,58 @@
+.studentDetailContainer {
+   @apply h-[calc(100vh-2.5rem)] relative flex justify-center;
+}
+
+.descriptionContainer {
+   @apply w-auto h-full flex flex-row;
+}
+
+.tabGroupContainer {
+   @apply relative w-[94px] h-full gap-1 mr-1 flex flex-col justify-center items-end;
+}
+
+.characterSpriteContainer {
+   @apply h-full flex justify-center items-center;
+}
+
+.contentDescriptionContainerScroll {
+   @apply w-[457px] h-full overflow-x-hidden overflow-y-scroll;
+}
+.contentDescriptionContainerScroll::-webkit-scrollbar {
+   width: 5px;
+}
+.contentDescriptionContainerScroll::-webkit-scrollbar-thumb {
+   @apply rounded-full;
+   background-color: #ffffff;
+}
+.contentDescriptionContainerScroll::-webkit-scrollbar-thumb:hover {
+   background-color: #555;
+}
+.contentDescriptionContainer {
+   @apply w-full min-h-full pb-2 bg-[rgba(0,0,0,0.3)];
+}
+
+@media (max-width: 768px) {
+   .studentDetailContainer {
+      @apply h-auto gap-0 flex-col overflow-scroll justify-start;
+   }
+
+   .descriptionContainer {
+      @apply w-screen flex-col;
+   }
+
+   .tabGroupContainer {
+      @apply w-full h-auto relative flex-row allCenter;
+   }
+
+   .characterSpriteContainer {
+      @apply w-screen h-[82vh];
+   }
+
+   .contentDescriptionContainerScroll {
+      @apply w-full h-auto overflow-y-auto;
+   }
+
+   .contentDescriptionContainer {
+      @apply w-screen h-full;
+   }
+}

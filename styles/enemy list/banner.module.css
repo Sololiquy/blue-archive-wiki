@@ -1,7 +1,0 @@
-.enemyImg {
-    @apply h-full -right-10 absolute object-cover;
-}
-
-.enemyBGImg {
-    @apply h-full left-0 absolute object-cover;
-}
