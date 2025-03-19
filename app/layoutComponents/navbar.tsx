@@ -16,9 +16,9 @@ export default function Navbar() {
             <div className="mr-7 text-lg font-semibold italic">
                <Link href="/studentList">Student</Link>
             </div>
-            {/* <div className="mr-7 text-lg font-semibold italic">
-               <Link href="/enemyDetail">Enemy</Link>
-            </div> */}
+            <div className="mr-7 text-lg font-semibold italic">
+               <Link href="/enemy">Enemy</Link>
+            </div>
          </div>
       </>
    );

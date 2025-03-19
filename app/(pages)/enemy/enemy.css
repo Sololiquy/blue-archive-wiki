@@ -1,0 +1,73 @@
+.enemyContainer {
+   @apply h-[calc(100vh-2.5rem)] relative flex gap-5 justify-center;
+}
+
+.listScroller {
+   @apply w-[calc(100%+5px)] h-full p-2 gap-2 flex flex-col items-center overflow-x-hidden overflow-y-scroll;
+}
+.listScroller::-webkit-scrollbar {
+   @apply w-[5px];
+}
+.listScroller::-webkit-scrollbar-thumb {
+   @apply rounded-full;
+   background-color: #ffffff;
+}
+.listScroller::-webkit-scrollbar-thumb:hover {
+   background-color: #555;
+}
+
+.detailContainer {
+   @apply w-[500px] h-[calc(100vh-2.5rem)] gap-1 relative flex flex-col;
+}
+
+.header {
+   @apply w-full relative font-bold text-2xl italic;
+}
+
+.banner {
+   @apply w-full h-[130px] shrink-0 relative overflow-hidden flex;
+}
+
+.difficultyTabGroup {
+   @apply w-full flex gap-1 px-1 shrink-0 flex-row overflow-x-scroll;
+}
+.difficultyTabGroup::-webkit-scrollbar {
+   @apply h-[5px];
+}
+.difficultyTabGroup::-webkit-scrollbar-thumb {
+   @apply rounded-full bg-white;
+}
+.difficultyTabGroup::-webkit-scrollbar-thumb:hover {
+   @apply bg-gray-600;
+}
+
+.detail {
+   @apply w-[calc(100%+5px)] relative overflow-y-scroll;
+}
+.detail::-webkit-scrollbar {
+   @apply w-[5px];
+}
+.detail::-webkit-scrollbar-thumb {
+   @apply rounded-full bg-white;
+}
+.detail::-webkit-scrollbar-thumb:hover {
+   @apply bg-gray-600;
+}
+
+@media (max-width: 769px) {
+   .enemyContainer {
+      @apply h-full flex-col justify-start overflow-scroll;
+   }
+
+   .listScroller {
+      @apply w-full flex-row flex-wrap justify-center;
+   }
+
+   .detailContainer {
+      @apply w-full h-auto;
+   }
+
+   .detail {
+      @apply w-full h-auto overflow-y-auto;
+   }
+}

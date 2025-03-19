@@ -78,7 +78,7 @@ export default function StatDescription({ onTierWeaponChange, handleBondLevelCha
          <div className="flex flex-row items-center">
             <div className="starGrade bg-[rgba(0,0,0,0.675)]">
                {Array.from({ length: studentData?.StarGrade }, (_, i) => (
-                  <img className="h-5 shrink-0 mx-0.5" key={i} src="/star.svg" alt="Star" />
+                  <img className="h-5 shrink-0 mx-0.5" key={i} src="/star.svg" alt="" />
                ))}
             </div>
             <div className={`typeSquad ${squadType[0]}`}>{squadType[1]}</div>
