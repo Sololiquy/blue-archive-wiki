@@ -11,7 +11,7 @@ interface parameterType {
 
 export default function EquipmentGear({ levelEquipmentGear, setLevelEquipmentGear }: parameterType) {
    const { studentData } = useContext(contextDetailStudent);
-   const [equipmentImgSrc, setEquipmentImgSrc] = useState<string>(``);
+   const [equipmentImgSrc, setEquipmentImgSrc] = useState<string>("");
    const maxLevel = studentData?.Gear?.StatValue?.[0]?.length || 0;
    useEffect(() => {
       if (levelEquipmentGear > 0) {

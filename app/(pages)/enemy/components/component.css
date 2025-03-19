@@ -1,0 +1,17 @@
+/* card.tsx */
+
+.containerCard {
+   @apply w-[300px] h-[80px] shrink-0 relative overflow-hidden flex;
+}
+
+@media (max-width: 769px) {
+   .containerCard {
+      @apply w-[200px];
+   }
+}
+
+/* skill.tsx */
+
+.infoATGCost {
+   @apply mr-2 w-8 rounded-full font-bold text-black italic text-base text-center;
+}
