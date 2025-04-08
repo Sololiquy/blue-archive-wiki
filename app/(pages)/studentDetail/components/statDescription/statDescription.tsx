@@ -33,7 +33,6 @@ export default function StatDescription({ onTierWeaponChange, handleBondLevelCha
       }
    }, [studentData, equipmentDataAPI, levelEquipment]);
 
-   studentData;
    if (!studentData) return <div>Loading...</div>;
 
    const studentWeaponURL = `https://schaledb.com/images/weapon/${studentData?.WeaponImg}.webp`;
