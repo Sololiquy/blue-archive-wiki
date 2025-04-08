@@ -22,7 +22,7 @@ export default function EnemyDetail() {
       setEnemy([index, name]);
    };
 
-   console.log(enemyAPI);
+   enemyAPI;
    return (
       <>
          <div className="backgroundContainer bg-gray-600"></div>
